@@ -1,5 +1,5 @@
 .coluna {
-  width: 24%;
+  width: 100%;
   height: 100vh;
   background: rgb(1,31,75);
   background: linear-gradient(39deg, rgba(1,31,75,1) 0%, rgba(3,57,108,1) 77%);
@@ -8,4 +8,5 @@
 
 .coluna img {
   height: 100vh;
+  width: 20vw;
 }

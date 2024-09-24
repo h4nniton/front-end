@@ -12,6 +12,7 @@
     align-items: center;
     width: 90%;
     gap: 50px;
+    width: 90%;
     
 }
 
@@ -22,4 +23,10 @@ input {
     border: none;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
 
+}
+
+.tela{
+    display: flex;
+    flex-direction: row;
+    gap: 50%;
 }

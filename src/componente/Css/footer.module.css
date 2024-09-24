@@ -26,6 +26,14 @@ p > .link{
     color: linear-gradient(267deg, rgba(1, 31, 75, 1) 0%, rgba(3, 57, 108, 1) 100%) ;
     font-weight: bold;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 17px;
+    cursor: pointer;
+
 }
 
 p{

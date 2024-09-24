@@ -18,9 +18,11 @@ function Header() {
                 <button className={styles.item} onClick={()=>navigate('/Login')}>
                     <p className={styles.item} >Entrar</p>
                 </button>
-                <button className={styles.button}  onClick={()=>navigate('/Cadastro')}>
-                    <p className={styles.buttonLink}>Cadastre-se</p>
+                <div className={styles.cadastro}>
+                     <button className={styles.button}  onClick={()=>navigate('/Cadastro')}>
+                    Cadastre-se
                 </button>
+                </div>
             </div>
 
         </div>

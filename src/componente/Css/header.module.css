@@ -6,7 +6,7 @@
     height: 10vh;
     background-color: white;
     align-items: center;
-    gap: 1400px;
+    gap: 70%;
 }
 
 .header img{
@@ -29,6 +29,12 @@
     color: #222222;
 }
 
+.cadastro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .button {
     background: rgb(1, 31, 75);
     background: linear-gradient(267deg, rgba(1, 31, 75, 1) 0%, rgba(3, 57, 108, 1) 100%);
@@ -43,14 +49,7 @@
     cursor: pointer;
     text-align: center;
     align-content: center;
-    align-items: center;
-}
-
-.buttonLink{
-    font-family: "Poppins", sans-serif;
     color: white;
-    text-decoration: none;
-    font-weight:normal;
 }
 
 .item{
@@ -60,4 +59,12 @@
     justify-content: center;
     text-decoration: none;
     display: flex;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 17px;
 }
+

@@ -1,9 +1,14 @@
 import styles from '../Css/footer.module.css'
+import { useNavigate } from 'react-router-dom'
+
 
 function EventoLogin() {
+    const navigate = useNavigate();
+
     async function meuEvento() {
         const emailCampo = document.getElementById('email').value
         const senhaCampo = document.getElementById('senha').value
+        
 
         let logado = false
         
@@ -22,7 +27,7 @@ function EventoLogin() {
                     listaClientes.clientes.forEach((usuario) => {
                         if (emailCampo === usuario.email_cliente && senhaCampo === usuario.senha_cliente) {
                             logado = true
-                            alert('logou!!!')
+                            navigate('/TelaIncial')
                         }
                     })
                 }
@@ -33,7 +38,7 @@ function EventoLogin() {
                             logado = true
                             console.log(emailCampo);
                             console.log(usuario.senha_freelancer);
-                            alert('logou!!!')
+                            navigate('/TelaIncial')
                         }
                     })
                 }
