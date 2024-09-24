@@ -2,6 +2,9 @@ import './App.css';
 import './index.css';
 import './componente/Css/coluna.module.css';
 import Inicio from './componente/Pages/Inicio.js';
+import Cadastro from './componente/Pages/Cadastro.js';
+import Login from './componente/Pages/Login.js';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 
 
@@ -10,11 +13,15 @@ import Inicio from './componente/Pages/Inicio.js';
 function App() {
 
   return (
-   <div className='App'>
-
-    <Inicio/>
-   
-   </div>
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Inicio/>}/>
+          <Route path='/Login' element={<Login/>}/>
+          <Route path='/Cadastro' element={<Cadastro/>}/>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

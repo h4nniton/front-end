@@ -1,21 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Cadastro from '../Pages/Cadastro.js'
-import Login from '../Pages/Login.js'
-import NavBar from '../Pages/navBar.js'
+
 import image from '../img/Logo.png'
 import styles from '../Css/header.module.css'
+import { useNavigate } from 'react-router-dom'
+
+
+
+
 
 function Header() {
+    const navigate = useNavigate();
     return (
         <div className={styles.header}>
             <img src={image}></img>
-            <Router >
-                <NavBar />
-                <Routes>
-                    <Route path="/cadastro" element={<Cadastro />}></Route>
-                    <Route path="/login" element={<Login />}></Route>
-                </Routes>
-            </Router>
+
+            <div className={styles.list}>
+
+                <button className={styles.item} onClick={()=>navigate('/Login')}>
+                    <p className={styles.item} >Entrar</p>
+                </button>
+                <button className={styles.button}  onClick={()=>navigate('/Cadastro')}>
+                    <p className={styles.buttonLink}>Cadastre-se</p>
+                </button>
+            </div>
 
         </div>
     )
