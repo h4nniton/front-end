@@ -3,10 +3,10 @@
     flex-direction: row;
     justify-content: center;
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
     background-color: white;
     align-items: center;
-    gap: 70%;
+    gap: 75%;
 }
 
 .header img{
@@ -66,5 +66,6 @@
     font-weight: 500;
     font-style: normal;
     font-size: 17px;
+    color: linear-gradient(39deg, #03396C 0%, #011F4B 77%);;
 }
 

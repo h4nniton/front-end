@@ -1,0 +1,83 @@
+.h1{
+    font-weight: 200;
+}
+
+.tela{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.escolhas{
+    gap: 90px;
+    display: flex;
+    flex-direction: row;
+    gap: 20%;
+    padding: 300px;
+}
+
+.escolha1{
+    position: relative;
+    padding: 20px; /* Espaçamento interno */
+    background-color: white; /* Cor de fundo da div */
+    border-radius: 15px;
+    width: 20vw;
+    height: 20vh;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.escolha1 img{
+    width: 150px;
+    height: 150px;
+}
+
+.escolha1::before {
+    content: '';
+    position: absolute;
+    top: -4px; /* Ajuste para a largura da borda */
+    left: -4px; /* Ajuste para a largura da borda */
+    right: -4px; /* Ajuste para a largura da borda */
+    bottom: -4px; /* Ajuste para a largura da borda */
+    background-image: linear-gradient(39deg, #03396C 0%, #066FD2 77%);
+    border-radius: 20px; /* Para manter o arredondamento */
+    z-index: -1;
+}
+
+
+.escolha2{
+    position: relative;
+    padding: 20px; /* Espaçamento interno */
+    background-color: white; /* Cor de fundo da div */
+    border-radius: 15px;
+    width: 20vw;
+    height: 20vh;
+    cursor: pointer;
+}
+.escolha2 img{
+    width: 150px;
+    height: 150px;
+}
+
+.escolha2::before {
+    content: '';
+    position: absolute;
+    top: -4px; /* Ajuste para a largura da borda */
+    left: -4px; /* Ajuste para a largura da borda */
+    right: -4px; /* Ajuste para a largura da borda */
+    bottom: -4px; /* Ajuste para a largura da borda */
+    background-image: linear-gradient(39deg, #03396C 0%, #066FD2 77%);
+    
+    border-radius: 20px; /* Para manter o arredondamento */
+    z-index: -1;
+}
+
+.botao{
+    width: 20%;
+    height: 5vh;
+    border-radius: 25px;
+    border: none;
+    color: #979797;
+    font-size: 20px;
+}
