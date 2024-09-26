@@ -21,24 +21,27 @@ function EventoLogin() {
                 const listaClientes = await getClientes.json()
                 const listaFreelancers = await getFreelancers.json()
 
+                console.log(listaClientes);
+                console.log(listaFreelancers);
+                
                 
 
                 if(listaClientes.clientes){
-                    listaClientes.clientes.forEach((usuario) => {
+                    listaClientes.object.clientes.forEach((usuario) => {
                         if (emailCampo === usuario.email_cliente && senhaCampo === usuario.senha_cliente) {
                             logado = true
-                            navigate('/TelaIncial')
+                            navigate('/TelaInicial')
                         }
                     })
                 }
 
                 if(listaFreelancers.freelancers){
-                    listaFreelancers.freelancers.forEach((usuario) => {
+                    listaFreelancers.object.freelancers.forEach((usuario) => {
                         if (emailCampo == usuario.email_freelancer && senhaCampo == usuario.senha_freelancer) {
                             logado = true
                             console.log(emailCampo);
                             console.log(usuario.senha_freelancer);
-                            navigate('/TelaIncial')
+                            navigate('/TelaInicial')
                         }
                     })
                 }

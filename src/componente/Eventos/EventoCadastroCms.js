@@ -15,7 +15,7 @@ function EventoCadastro() {
             if (confirmarcaoCampo != senhaCampo) {
                 alert('senhas incompativeis')
             } else {
-                let validarCadastro = '';
+                let resultCadastro = '';
 
                 try {
                     const novoUsuario = {
@@ -25,19 +25,27 @@ function EventoCadastro() {
                         senha_cliente: senhaCampo,
                     }
 
-                    let resultCadastro = await fetch (postCliente(novoUsuario))
-                    validarCadastro = await resultCadastro.json()
+                    let validarCadastro = await fetch('http://localhost:8080/v1/jinni/cliente', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(novoUsuario)
+                    })
 
-                    if (validarCadastro.status_code == 201) {
-                        alert('Cadastro concluído!')
-    
-                    } else {
-                        alert(validarCadastro.status_code)
-                    }
+                    resultCadastro = await validarCadastro.json()
+
 
                 } catch (error) {
                     alert('⚠︎ Erro')
                     console.log(error);
+                }
+
+                if (resultCadastro.status_code == 201) {
+                    alert('Cadastro concluído!')
+
+                } else {
+                    alert(resultCadastro .status_code)
                 }
             }
         }

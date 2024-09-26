@@ -1,5 +1,5 @@
 export async function postCliente (cliente) {
-    const url = `https://jinni.onrender.com/v1/jinni/cliente`
+    const url = `http://localhost:8080/v1/jinni/cliente`
     const options = {
         method: 'POST',
         headers: {
@@ -12,7 +12,7 @@ export async function postCliente (cliente) {
 }
 
 export async function postFreelancer (freelancer) {
-    const url = `https://jinni.onrender.com/v1/jinni/freelancer`
+    const url = `http://localhost:8080/v1/jinni/freelancer`
     const options = {
         method: 'POST',
         headers: {
