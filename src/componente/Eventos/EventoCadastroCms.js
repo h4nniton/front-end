@@ -9,7 +9,6 @@ function EventoCadastro() {
         const senhaCampo = document.getElementById('senha').value
         const confirmarcaoCampo = document.getElementById('confirmacao').value
         const cnpjCampo = document.getElementById('cnpj').value
-
         if (nomeCampo == '' || emailCampo == '' || senhaCampo == '' || confirmarcaoCampo == '' || cnpjCampo == '') {
             alert('Preencha os campos corretamente!')
         } else {
@@ -26,29 +25,20 @@ function EventoCadastro() {
                         senha_cliente: senhaCampo,
                     }
 
-                    let resultCadastro = await fetch('http://localhost:8080/v1/jinni/cliente', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-
-                        body: JSON.stringify(novoUsuario)
-                    })
-
+                    let resultCadastro = await fetch (postCliente(novoUsuario))
                     validarCadastro = await resultCadastro.json()
+
+                    if (validarCadastro.status_code == 201) {
+                        alert('Cadastro concluído!')
+    
+                    } else {
+                        alert(validarCadastro.status_code)
+                    }
 
                 } catch (error) {
                     alert('⚠︎ Erro')
                     console.log(error);
                 }
-
-                if (validarCadastro.status_code == 201) {
-                    alert('Cadastro concluído!')
-
-                } else {
-                    alert(validarCadastro.status_code)
-                }
-
             }
         }
 
