@@ -23,3 +23,15 @@ export async function postFreelancer (freelancer) {
     const response = await fetch(url, options)
     return response.ok
 }
+
+
+export async function getCategoria(){
+    const url = 'http://localhost:8080/v1/jinni/categorias'
+    const response = await fetch (url)
+    const data = await response.json()
+    return data
+}
+
+
+
+

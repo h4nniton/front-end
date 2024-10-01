@@ -1,7 +1,11 @@
 import { postCliente } from "../integração/funcao.js"
 import styles from '../Css/footer.module.css'
+import { useNavigate } from 'react-router-dom'
+
 
 function EventoCadastro() {
+    const navigate = useNavigate();
+
 
     async function meuEvento() {
         const nomeCampo = document.getElementById('nome').value
@@ -43,9 +47,11 @@ function EventoCadastro() {
 
                 if (resultCadastro.status_code == 201) {
                     alert('Cadastro concluído!')
+                    navigate('/CriacaoDePerfil')
+
 
                 } else {
-                    alert(resultCadastro .status_code)
+                    alert('info')
                 }
             }
         }

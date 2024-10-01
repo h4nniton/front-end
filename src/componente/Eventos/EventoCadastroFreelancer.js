@@ -1,5 +1,7 @@
 import { postFreelancer } from "../integração/funcao.js"
 import styles from '../Css/footer.module.css'
+import { useNavigate } from 'react-router-dom'
+
 
 function eAdulto(valorDataNascimento) {
     const dataAtual = new Date();
@@ -16,6 +18,7 @@ function eAdulto(valorDataNascimento) {
 }
 
 function EventoCadastro() {
+    const navigate = useNavigate();
 
     async function meuEvento() {
         const nomeCampo = document.getElementById('nome').value
@@ -65,6 +68,7 @@ function EventoCadastro() {
     
                     if (validarCadastro.status_code == 201) {
                         alert('Cadastro concluído!')
+                        navigate('/CriacaoDePerfil')
     
                     } else {
                         alert(validarCadastro.status_code)
@@ -81,7 +85,7 @@ function EventoCadastro() {
 
     return (
         <div>
-            <button className={styles.button} onClick={meuEvento}>Continuar</button>
+            <button className={styles.button} onClick={meuEvento} >Continuar</button>
         </div>
     )
 

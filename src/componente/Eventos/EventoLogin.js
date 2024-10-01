@@ -27,7 +27,7 @@ function EventoLogin() {
                 
 
                 if(listaClientes.clientes){
-                    listaClientes.object.clientes.forEach((usuario) => {
+                    listaClientes.clientes.forEach((usuario) => {
                         if (emailCampo === usuario.email_cliente && senhaCampo === usuario.senha_cliente) {
                             logado = true
                             navigate('/TelaInicial')
@@ -36,7 +36,7 @@ function EventoLogin() {
                 }
 
                 if(listaFreelancers.freelancers){
-                    listaFreelancers.object.freelancers.forEach((usuario) => {
+                    listaFreelancers.freelancers.forEach((usuario) => {
                         if (emailCampo == usuario.email_freelancer && senhaCampo == usuario.senha_freelancer) {
                             logado = true
                             console.log(emailCampo);

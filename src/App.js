@@ -8,6 +8,7 @@ import TelaInicial from './componente/Pages/TelaInicial.js'
 import CadastroCms from './componente/Pages/CadastroCms.js'
 import CadastroFreelancer from './componente/Pages/CadastroFreelancer.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import PerfilCriacao from './componente/Pages/PerfilCriacao';
 
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/TelaInicial' element={<TelaInicial />}></Route>
           <Route path='/CadastroCms' element={<CadastroCms />}></Route>
           <Route path='/CadastroFreelancer' element={<CadastroFreelancer />}></Route>
+          <Route path='/CriacaoDePerfil' element={<PerfilCriacao />}></Route>
         </Routes>
       </Router>
     </div>
