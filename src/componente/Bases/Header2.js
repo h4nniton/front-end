@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 function Header2() {
     const navigate = useNavigate();
     return (
-        <div className={styles.header}>
+        <div className={styles.header2}>
             <img src={image}></img>
 
             <div className={styles.list}>
