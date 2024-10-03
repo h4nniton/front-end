@@ -1,6 +1,6 @@
 import styles from '../Css/PerfilCriacao.module.css'
+import App from '../Eventos/EventosCriarCard'
 import img from '../img/Logo.png'
-import EventoGerarCard from '../Eventos/EventoGerarCard'
 
 
 function PerfilCriacao() {
@@ -15,7 +15,7 @@ function PerfilCriacao() {
             <p className={styles.p}> selecione as áreas das quais você trabalha</p>
 
             <div id="categorias" className={styles.section}>
-                <EventoGerarCard/>
+                <App/>
             </div>
         </div>
     )
