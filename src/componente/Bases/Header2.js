@@ -6,7 +6,7 @@ function Header2() {
     const navigate = useNavigate();
     return (
         <div className={styles.header2}>
-            <img src={image}></img>
+            <img src={image}  onClick={()=>navigate('/')}></img>
 
             <div className={styles.list}>
                 <div className={styles.item}>

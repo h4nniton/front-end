@@ -7,13 +7,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 80%;
+    gap: 5%;
 }
 
 .escolhas{
     display: flex;
     flex-direction: row;
-    gap: 20%;
-    padding: 10%;
+    gap: 15%;
+    padding: 5%;
 }
 
 .escolha1{
@@ -28,8 +30,8 @@
 
 }
 .escolha1 img{
-    width: 130px;
-    height: 130px;
+    width: 140px;
+    height: 140px;
 }
 
 .escolha1::before {
@@ -106,15 +108,5 @@
     justify-content: end;
 }
 
-.botao{
-    width: 20%;
-    height: 5vh;
-    border-radius: 25px;
-    border: none;
-    color: #979797;
-    font-size: 20px;
-}
 
-.mudaBotão{
-    background-color: red;
-}
+

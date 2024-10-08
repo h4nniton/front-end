@@ -1,14 +1,18 @@
 import styles from '../Css/PerfilCriacao.module.css'
 import App from '../Eventos/EventosCriarCard'
 import img from '../img/Logo.png'
+import { useNavigate } from 'react-router-dom'
+
 
 
 function PerfilCriacao() {
+    const navigate = useNavigate();
+
 
     return (
         <div>
             <div className={styles.header}>
-                <img src={img}></img>
+                <img src={img} onClick={()=>navigate('/')}></img>
             </div>
 
             <h1>Selecione suas categorias</h1>
