@@ -9,6 +9,7 @@ import CadastroCms from './componente/Pages/CadastroCms.js'
 import CadastroFreelancer from './componente/Pages/CadastroFreelancer.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PerfilCriacao from './componente/Pages/PerfilCriacao';
+import PerfilHabilidade from './componente/Pages/PerfilHabilidade.js'
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/CadastroCms' element={<CadastroCms />}></Route>
           <Route path='/CadastroFreelancer' element={<CadastroFreelancer />}></Route>
           <Route path='/CriacaoDePerfil' element={<PerfilCriacao />}></Route>
+          <Route path='/PerfilHabilidade' element={<PerfilHabilidade />}></Route>
         </Routes>
       </Router>
     </div>

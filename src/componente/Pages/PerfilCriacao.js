@@ -21,6 +21,8 @@ function PerfilCriacao() {
             <div id="categorias" className={styles.section}>
                 <App/>
             </div>
+
+            <button className={styles.botao} onClick={()=>navigate('/PerfilHabilidade')} >Continuar</button>
         </div>
     )
 
