@@ -1,0 +1,13 @@
+.frame{
+    width: 100%;
+    display: flex;
+}
+
+.tela{
+    width: 100%;
+    background-color: red;
+    height: 50vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}

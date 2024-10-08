@@ -5,14 +5,16 @@
     flex-direction: row;
     gap: 15%;
     align-items: center;
+    padding: 3%;
 }
 
 .card{
-    width: 40%;
+    width: 50%;
     height: 40%;
     background-color: aqua;
     gap: 15%;
     border-radius: 20px;
+    align-items: center;
 }
 
 .img{

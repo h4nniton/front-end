@@ -6,7 +6,7 @@ const EventosCriarCard = ({ categoria }) => {
     console.log(categoria);
 
     return (
-        <div className={styles.body}>
+        <div className={styles.card}>
 
             <img src={categoria.icon_categoria} alt={categoria.nome_categoria} className={styles.img} />
             <p>{categoria.nome_categoria}</p>
