@@ -1,13 +1,8 @@
-.frame{
-    width: 100%;
+.telas{
     display: flex;
+    flex-direction: column;
 }
 
-.tela{
-    width: 100%;
-    background-color: red;
-    height: 50vh;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+.navegacao{
+    
 }

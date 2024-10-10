@@ -32,6 +32,13 @@ export async function getCategoria(){
     return data
 }
 
+export async function getHabilidade(){
+    const url = 'http://localhost:8080/v1/jinni/habilidades'
+    const response = await fetch (url)
+    const data = await response.json()
+    return data
+}
+
 
 
 

@@ -1,0 +1,19 @@
+.navegacoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    justify-content: space-evenly;
+    background-color: #011F4B;
+    height: 85vh;
+    width: 6vw;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.p{
+    color: white;
+}
+
+.img{
+    width: ;
+}

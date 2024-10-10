@@ -10,6 +10,10 @@ import CadastroFreelancer from './componente/Pages/CadastroFreelancer.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PerfilCriacao from './componente/Pages/PerfilCriacao';
 import PerfilHabilidade from './componente/Pages/PerfilHabilidade.js'
+import FimCadastro from './componente/Pages/FimCadastro.js';
+import Projetos from './componente/Pages/Projetos.js'
+import Notificacoes from './componente/Pages/Notificacoes.js'
+import Mensagens from './componente/Pages/Mensagens.js'
 
 
 
@@ -29,6 +33,10 @@ function App() {
           <Route path='/CadastroFreelancer' element={<CadastroFreelancer />}></Route>
           <Route path='/CriacaoDePerfil' element={<PerfilCriacao />}></Route>
           <Route path='/PerfilHabilidade' element={<PerfilHabilidade />}></Route>
+          <Route path='/FimCadastro' element={<FimCadastro />}></Route>
+          <Route path='/Projetos' element={<Projetos />}></Route>
+          <Route path='/Notificacoes' element={<Notificacoes />}></Route>
+          <Route path='/Mensagens' element={<Mensagens />}></Route>
         </Routes>
       </Router>
     </div>
