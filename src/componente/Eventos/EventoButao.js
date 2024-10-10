@@ -24,6 +24,7 @@ const EventoButao = () => {
         if(!select1){
             select1 = true
             document.getElementById('select1').style.backgroundColor='#03396C'
+            document.getElementById('select1').style.border='2px solid white'
         } else {
             select1 = false
             document.getElementById('select1').style.backgroundColor='#ffffff'
@@ -36,6 +37,7 @@ const EventoButao = () => {
         if(!select2){
             select2 = true
             document.getElementById('select2').style.backgroundColor='#03396C'
+            document.getElementById('select2').style.border='2px solid white'
         } else {
             select2 = false
             document.getElementById('select2').style.backgroundColor='#ffffff'

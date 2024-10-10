@@ -47,7 +47,7 @@ function EventoCadastro() {
 
                 if (resultCadastro.status_code == 201) {
                     alert('Cadastro concluído!')
-                    navigate('/CriacaoDePerfil')
+                    navigate('/TelaInicial')
 
 
                 } else {

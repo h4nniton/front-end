@@ -3,10 +3,15 @@ import { getCategoria } from '../integração/funcao.js'
 import styles from '../Css/card.module.css'
 
 const EventosCriarCard = ({ categoria }) => {
-    console.log(categoria);
+    const [isSelected, setIsSelected] = useState(false);
+
+    const handleCardClick = () => {
+        setIsSelected(!isSelected); // Alterna o estado entre true e false
+      };
 
     return (
-        <div className={styles.card}>
+        <div className={`${styles.card} ${isSelected ? styles.cardSelected : ''}`} // Aplica a classe 'cardSelected' se 'isSelected' for true
+        onClick={handleCardClick}>
 
             <img src={categoria.icon_categoria} alt={categoria.nome_categoria} className={styles.img} />
             <p>{categoria.nome_categoria}</p>

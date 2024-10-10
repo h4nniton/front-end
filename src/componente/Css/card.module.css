@@ -25,10 +25,15 @@
     gap: 24px;
 }
 
+.cardSelected {
+    border: 2px solid #03396C;
+    border-radius: 20px;
+    box-shadow: none;
+  }
 
 
 
 .img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
