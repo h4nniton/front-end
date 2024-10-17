@@ -27,6 +27,7 @@ const App = () => {
         const fetchHabilidade = async () => {
             const data = await getHabilidade();
             setHabilidades(data.habilidades);
+            console.log(habilidades)
         };
 
         fetchHabilidade();
@@ -35,6 +36,7 @@ const App = () => {
     return (
         <div id="categorias" className={styles.body}>
             {habilidades.map((habilidade) => (
+                
                 <EventosCriarCard key={habilidade.id} habilidade={habilidade} />
             ))}
         </div>

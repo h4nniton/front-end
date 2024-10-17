@@ -2,7 +2,75 @@
     display: flex;
     flex-direction: column;
 }
+.propostas{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.pi{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
 
 .navegacao{
-    
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    align-items: center;
+}
+
+.card{
+    height: 25vh;
+    width: 20vw;
+    background: linear-gradient(0deg, rgba(1,31,75,1) 35%, rgba(3,57,108,1) 100%);
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.card h2{
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+.card p{
+    font-size: 15px;
+    text-align: start;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    color: white;
+}
+
+.habilidade{
+    width: 3vw;
+    height: 3vh;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.habilidade img{
+    width: 1.5vw;
+    height: 2.5vh;
+}
+
+.filho{
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
 }

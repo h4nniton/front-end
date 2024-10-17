@@ -15,4 +15,7 @@
 }
 
 .img{
+    width: 3vh;
+    height: 30%;
+    cursor: pointer;
 }
