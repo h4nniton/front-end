@@ -7,7 +7,20 @@ import { useNavigate } from 'react-router-dom'
 
 function PerfilCriacao() {
     const navigate = useNavigate();
+    const array = []
 
+    const cadastrar = () => {
+        
+    }
+
+    const handleClick = () => {
+        if(array.length > 0){
+            cadastrar()
+            navigate('/PerfilHabilidade')
+        }else {
+            alert('tá vazia saporra')
+        }
+    }
 
     return (
         <div>
@@ -19,10 +32,11 @@ function PerfilCriacao() {
             <p className={styles.p}> selecione as áreas das quais você trabalha</p>
 
             <div id="categorias" className={styles.section}>
-                <App/>
+                <App array={array}/>
             </div>
 
-            <button className={styles.botao} onClick={()=>navigate('/PerfilHabilidade')} >Continuar</button>
+
+            <button className={styles.botao} onClick={handleClick} >Continuar</button>
         </div>
     )
 

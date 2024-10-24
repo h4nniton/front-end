@@ -60,7 +60,7 @@ function EventoCadastro() {
                             let id_freelancer = resultCadastro.freelancer.id_freelancer
                             console.log(id_freelancer);
                             alert('Cadastro concluído!')
-                            navigate('/CriacaoDePerfil')
+                            navigate('/CriacaoDePerfil', {state: {id_freelancer: id_freelancer}})
 
                         } else {
                             alert(validarCadastro.status_code)
