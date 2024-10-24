@@ -35,8 +35,8 @@ function EventoCadastro() {
                 alert('Senhas incompativeis')
             } else {
                 const adulto = eAdulto(dataNascimentoCampo)
-                
-                if(!adulto){
+
+                if (!adulto) {
                     alert("O usuário é menor de 18. Pode não!")
                 } else {
                     let validarCadastro = '';
@@ -49,34 +49,34 @@ function EventoCadastro() {
                             email_freelancer: emailCampo,
                             senha_freelancer: senhaCampo,
                         }
-    
-                        let resultCadastro = await fetch('http://localhost:8080/v1/jinni/freelancer', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-    
-                            body: JSON.stringify(novoUsuario)
-                        })
-    
-                        validarCadastro = await resultCadastro.json()
-    
+
+                        let resultCadastro = await postFreelancer(novoUsuario)
+
+                        console.log(resultCadastro);
+
+                        validarCadastro = await resultCadastro
+
+                        if (validarCadastro.status_code == 201) {
+                            let id_freelancer = resultCadastro.freelancer.id_freelancer
+                            console.log(id_freelancer);
+                            alert('Cadastro concluído!')
+                            navigate('/CriacaoDePerfil')
+
+                        } else {
+                            alert(validarCadastro.status_code)
+                        }
+
                     } catch (error) {
                         alert('⚠︎ Erro')
                         console.log(error);
                     }
-    
-                    if (validarCadastro.status_code == 201) {
-                        alert('Cadastro concluído!')
-                        navigate('/CriacaoDePerfil')
-    
-                    } else {
-                        alert(validarCadastro.status_code)
-                    }
+
+
+
 
                 }
 
-            
+
 
             }
         }

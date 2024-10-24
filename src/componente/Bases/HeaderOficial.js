@@ -14,7 +14,7 @@ function HeaderOficial() {
 
                 <div>
                     <p>Nome usuario</p>
-                    <img></img>
+                    <img ></img>
                 </div>
             </div>
 
