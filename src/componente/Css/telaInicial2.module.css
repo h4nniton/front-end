@@ -1,3 +1,4 @@
+
 .telas{
     display: flex;
     flex-direction: column;
@@ -75,3 +76,15 @@
     gap: 7px;
 }
 
+
+.feed{
+    width: 80vw;
+    height: 83vh;
+    background-color: #EFEFEF;
+}
+
+.perfil{
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+}

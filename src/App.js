@@ -4,7 +4,8 @@ import './componente/Css/coluna.module.css';
 import Inicio from './componente/Pages/Inicio.js';
 import Cadastro from './componente/Pages/Cadastro.js';
 import Login from './componente/Pages/Login.js';
-import TelaInicial from './componente/Pages/TelaInicial.js'
+import TelaInicial from './componente/Pages/freelancer/TelaInicial.js'
+import TelaInicialEmpresa from './componente/Pages/empresa/TelaInicialEmpresa.js'
 import CadastroCms from './componente/Pages/CadastroCms.js'
 import CadastroFreelancer from './componente/Pages/CadastroFreelancer.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -29,6 +30,7 @@ function App() {
           <Route path='/Login' element={<Login />} />
           <Route path='/Cadastro' element={<Cadastro />} />
           <Route path='/TelaInicial' element={<TelaInicial />}></Route>
+          <Route path='/TelaInicial2' element={<TelaInicialEmpresa />}></Route>
           <Route path='/CadastroCms' element={<CadastroCms />}></Route>
           <Route path='/CadastroFreelancer' element={<CadastroFreelancer />}></Route>
           <Route path='/CriacaoDePerfil' element={<PerfilCriacao />}></Route>

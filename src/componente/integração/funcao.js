@@ -48,3 +48,10 @@ export async function getHabilidade() {
     const data = await response.json()
     return data
 }
+
+export async function getFreelancers() {
+    const url = 'http://localhost:8080/v1/jinni/freelancers'
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+}
