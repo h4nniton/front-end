@@ -11,9 +11,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PerfilCriacao from './componente/Pages/PerfilCriacao';
 import PerfilHabilidade from './componente/Pages/PerfilHabilidade.js'
 import FimCadastro from './componente/Pages/FimCadastro.js';
-import Projetos from './componente/Pages/Projetos.js'
-import Notificacoes from './componente/Pages/Notificacoes.js'
-import Mensagens from './componente/Pages/Mensagens.js'
+import Projetos from './componente/Pages/empresa/Projetos.js'
+import Notificacoes from './componente/Pages/empresa/Notificacoes.js'
+import Mensagens from './componente/Pages/empresa/Mensagens.js'
 
 
 
