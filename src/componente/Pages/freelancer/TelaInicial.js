@@ -10,7 +10,9 @@ import java from '../../img/javaIcon.png'
 
 function TelaInicial() {
     return (
+        
         <div className={style.telas}>
+            <div>DE</div>
             <HeaderOficial />
             <div className={style.navegacao}>
                 <NavBar />
