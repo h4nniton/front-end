@@ -1,12 +1,12 @@
-import HeaderOficial from '../Bases/HeaderOficial.js'
-import NavBar from '../Bases/NavBar.js'
-import style from '../Css/telaInicial.module.css'
-import js from '../img/jsIcon.png'
-import react from '../img/reactIcon.png'
-import css from '../img/cssIcon.png'
-import html from '../img/htmlIcon.png'
-import kotlin from '../img/kotlinIcon.png'
-import java from '../img/javaIcon.png'
+import HeaderOficial from '../../Bases/HeaderOficial.js'
+import NavBar from '../../Bases/NavBar.js'
+import style from '../../Css/telaInicial.module.css'
+import js from '../../img/jsIcon.png'
+import react from '../../img/reactIcon.png'
+import css from '../../img/cssIcon.png'
+import html from '../../img/htmlIcon.png'
+import kotlin from '../../img/kotlinIcon.png'
+import java from '../../img/javaIcon.png'
 
 function TelaInicial() {
     return (
