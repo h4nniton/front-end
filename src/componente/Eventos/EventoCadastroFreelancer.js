@@ -51,9 +51,6 @@ function EventoCadastro() {
                         }
 
                         let resultCadastro = await postFreelancer(novoUsuario)
-
-                        console.log(resultCadastro);
-
                         validarCadastro = await resultCadastro
 
                         if (validarCadastro.status_code == 201) {

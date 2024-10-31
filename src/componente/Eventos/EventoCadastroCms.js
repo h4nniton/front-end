@@ -1,4 +1,4 @@
-import { postCliente } from "../integração/funcao.js"
+import { postCliente, postFreelancer } from "../integração/funcao.js"
 import styles from '../Css/footer.module.css'
 import { useNavigate } from 'react-router-dom'
 
@@ -19,7 +19,7 @@ function EventoCadastro() {
             if (confirmarcaoCampo != senhaCampo) {
                 alert('senhas incompativeis')
             } else {
-                let resultCadastro = '';
+                let validarCadastro = '';
 
                 try {
                     const novoUsuario = {
@@ -29,15 +29,18 @@ function EventoCadastro() {
                         senha_cliente: senhaCampo,
                     }
 
-                    let validarCadastro = await fetch('http://localhost:8080/v1/jinni/cliente', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(novoUsuario)
-                    })
+                    let resultCadastro = await postCliente(novoUsuario)
 
-                    resultCadastro = await validarCadastro.json()
+                    validarCadastro = await resultCadastro.json()
+                    if (validarCadastro.status_code == 201) {
+                        let id_freelancer = resultCadastro.freelancer.id_freelancer
+                        console.log(id_freelancer);
+                        alert('Cadastro concluído!')
+                        navigate('/CriacaoDePerfil', {state: {id_freelancer: id_freelancer}})
+
+                    } else {
+                        alert(validarCadastro.status_code)
+                    }
 
 
                 } catch (error) {
@@ -45,14 +48,6 @@ function EventoCadastro() {
                     console.log(error);
                 }
 
-                if (resultCadastro.status_code == 201) {
-                    alert('Cadastro concluído!')
-                    navigate('/TelaInicial2')
-
-
-                } else {
-                    alert('info')
-                }
             }
         }
 
