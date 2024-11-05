@@ -15,6 +15,8 @@ import FimCadastro from './componente/Pages/FimCadastro.js';
 import Projetos from './componente/Pages/empresa/Projetos.js'
 import Notificacoes from './componente/Pages/empresa/Notificacoes.js'
 import Mensagens from './componente/Pages/empresa/Mensagens.js'
+import PerfilFreelancer from './componente/Pages/empresa/PerfilFreelancer.js';
+import perfilEmpresa from './componente/Pages/empresa/PerfilEmpresa.js';
 
 
 
@@ -39,10 +41,12 @@ function App() {
           <Route path='/Projetos' element={<Projetos />}></Route>
           <Route path='/Notificacoes' element={<Notificacoes />}></Route>
           <Route path='/Mensagens' element={<Mensagens />}></Route>
+          <Route path='/perfilFreelancer' element={<PerfilFreelancer />}></Route>
+          <Route path='/perfilEmpresa' element={<perfilEmpresa />}></Route>
+
         </Routes>
       </Router>
     </div>
   );
 }
-
 export default App;

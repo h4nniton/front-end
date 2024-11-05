@@ -12,4 +12,19 @@
 .header img{
     width: 5%;
     height: 66%;
+    padding: 20px;
+}
+
+
+.user{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.user img{
+    width: 20%;
+    height: 66%;
+    cursor: pointer;
 }

@@ -11,8 +11,13 @@
 
 .pi{
     display: flex;
+    overflow: auto;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 30px;
+    padding: 40px;
+    width: 76vw;
+    height: 73vh;
 }
 
 .navegacao{

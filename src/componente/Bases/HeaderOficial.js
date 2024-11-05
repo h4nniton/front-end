@@ -1,5 +1,6 @@
 import styles from '../Css/HeaderOficial.module.css'
 import image from '../img/Logo.png'
+import img from "../img/avatar.avif"
 import { useNavigate } from 'react-router-dom'
 
 
@@ -12,9 +13,9 @@ function HeaderOficial() {
             <div className={styles.header}>
                 <img src={image} onClick={() => navigate('/')}></img>
 
-                <div>
+                <div className={styles.user}>
                     <p>Nome usuario</p>
-                    <img ></img>
+                    <img src={img} onClick={() => navigate('/PerfilEmpresa')} ></img>
                 </div>
             </div>
 
