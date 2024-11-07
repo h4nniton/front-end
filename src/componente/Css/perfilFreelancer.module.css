@@ -47,3 +47,31 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+.navigate {
+    display: flex;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0px 17px 37px -6px rgba(117, 115, 117, 1);
+    -moz-box-shadow: 0px 17px 37px -6px rgba(117, 115, 117, 1);
+    box-shadow: 0px 17px 37px -6px rgba(117, 115, 117, 1);
+    border-radius: 20px;
+    padding: 10px;
+    gap: 10px;
+    width: 30vw;
+}
+
+.navigate li {
+    color: #03396C;
+    font-size: 300;
+    padding: 10px;
+    list-style-type: none;
+    font-weight: bolder;
+    padding: 5px 60px;
+    cursor: pointer;
+}
+
+.selecionado {
+    background-color: #03396C;
+    border-radius: 2rem;
+    color: white !important;
+}

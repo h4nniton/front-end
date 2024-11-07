@@ -1,0 +1,10 @@
+.portfolio{
+    background-color: #03396C;
+    width: 15vw;
+}
+
+.previa{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
