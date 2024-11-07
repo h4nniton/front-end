@@ -15,7 +15,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 30px;
+    align-items: center;
     padding: 40px;
+    justify-content: center;
     width: 76vw;
     height: 73vh;
 }
@@ -36,6 +38,7 @@
     flex-direction: column;
     padding-left: 20px;
     padding-right: 10px;
+    padding-top: px;
     border-radius: 10px;
     cursor: pointer;
 

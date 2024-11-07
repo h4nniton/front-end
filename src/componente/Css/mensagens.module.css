@@ -1,0 +1,11 @@
+.navegacao{
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    align-items: center;
+}
+
+.telas{
+    display: flex;
+    flex-direction: column;
+}

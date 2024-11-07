@@ -1,0 +1,46 @@
+css:
+.container {
+	display:flex;
+}
+
+js:
+
+import Star from 'caminho'
+import {useState} from "react"
+
+const items: number[] = [...new Array(5).keys() as any]
+
+ function app(){
+	const [activeIndex, setActiveIndex] = useState<number>():
+	const onClickStar = (index: number) => {
+		setActiveIndex((oldState) => (oldState === index ? undefined : index));
+}
+
+	return(
+		<div classname={style.container}>
+		{items.map((index) => (<Star onClick={() => onClickStar(index)} key ={'star_${index}'} isActive = {index =< activeIndex! }/> )) }
+	)
+}
+
+
+icone de estrela precisa ser svg, podemos usar o fontawesome é de graça
+
+criar um componente para a estrela preenchida e uma para a estrela vazia
+para mudar a cor:
+
+type Props = {
+	isActive: boolean;
+	onClick(): void;
+}
+
+const Star = ({isActive, onClick}: Props) => {
+ return(
+	<button onClick = {onClick}>
+	//codigo svg da estrela// fill = {isActive ? "blue" : "white"} width={50} height={50}
+	</button>
+	
+	
+)
+}
+
+export default Star

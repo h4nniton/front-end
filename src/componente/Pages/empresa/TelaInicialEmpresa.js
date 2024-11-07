@@ -2,6 +2,7 @@ import HeaderOficial from '../../Bases/HeaderOficial.js'
 import NavBar from '../../Bases/NavBar2.js'
 import style from '../../Css/telaInicial2.module.css'
 import img from '../../img/image 1.png'
+import estrelas from '../../img/estrelas.png'
 import { useNavigate } from 'react-router-dom'
 import EventoGerarFreelancer from '../../Eventos/EventoGerarFreelancer.js'
 
