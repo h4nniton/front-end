@@ -1,6 +1,11 @@
 .portfolio{
     background-color: #03396C;
     width: 15vw;
+    border-radius: 20px;
+}
+
+.portfolio p{
+    color: white;
 }
 
 .previa{

@@ -43,7 +43,7 @@ function PerfilFreelancer() {
                     <p>nível</p>
                 </div>
 
-                <div > 
+                <div className={style.detalhe}> 
                     <ul className={style.navigate}>
                         <li onClick={(e) => changeScreen(1, e)} className={`${style.selecionado}`}>Início</li>
                         <li onClick={(e) => changeScreen(2, e)} className={``}>Portfólio</li>

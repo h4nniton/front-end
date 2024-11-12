@@ -1,7 +1,8 @@
+
 function ProjetosHistorico(){
     return(
         <div>
-            desgraçado
+            
         </div>
     )
 }

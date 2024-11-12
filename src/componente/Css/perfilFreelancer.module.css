@@ -36,6 +36,13 @@
     padding: 17px;
 }
 
+.detalhe{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .botao {
     width: 15vw;
     height: 4vh;
@@ -50,6 +57,7 @@
 
 .navigate {
     display: flex;
+    
     background-color: #FFFFFF;
     -webkit-box-shadow: 0px 17px 37px -6px rgba(117, 115, 117, 1);
     -moz-box-shadow: 0px 17px 37px -6px rgba(117, 115, 117, 1);

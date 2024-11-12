@@ -1,0 +1,40 @@
+.portfolio {
+    background-color: #03396C;
+    width: 15vw;
+    border-radius: 15px;
+}
+
+.portfolio p{
+    color: white;
+    font-weight: 300
+}
+
+.previa {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 20px;
+}
+
+.historico {
+    overflow: auto;
+    padding: 20px;
+    height: 70vh;
+    background-color: #EFEFEF;
+}
+
+.adicionar {
+    width: 50px;
+    height: 50px;
+    background-color: #03396C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    cursor: pointer;
+
+}
+
+.adicionar h1{
+    color: white;
+}
