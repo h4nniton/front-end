@@ -20,6 +20,7 @@ import perfilEmpresa from './componente/Pages/empresa/PerfilEmpresa.js';
 import Portfolio from './componente/Pages/empresa/Portfolio.js';
 import ProjetosHistorico from './componente/Pages/empresa/ProjetosHistorico.js';
 import InicioFreelancer from './componente/Pages/empresa/InicioFreelancer.js';
+import Chat from './componente/Pages/chat/Chat.js';
 
 
 
@@ -49,6 +50,7 @@ function App() {
           <Route path='/portfolio' element={<Portfolio />}></Route>
           <Route path='/ProjetosHistorico' element={<ProjetosHistorico />}></Route>
           <Route path='/Inicio' element={<InicioFreelancer />}></Route>
+          <Route path='/Chat' element={<Chat />}></Route>
 
         </Routes>
       </Router>
