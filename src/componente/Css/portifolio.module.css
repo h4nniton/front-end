@@ -19,8 +19,11 @@
 .historico {
     overflow: auto;
     padding: 20px;
-    height: 70vh;
+    width: 44vw;
+    height: 60vh;
     background-color: #EFEFEF;
+    justify-content: center;
+    align-items: center;
 }
 
 .adicionar {
@@ -32,7 +35,7 @@
     justify-content: center;
     border-radius: 30px;
     cursor: pointer;
-
+    justify-self: center;
 }
 
 .adicionar h1{

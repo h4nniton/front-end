@@ -26,11 +26,11 @@ const grafico = () => {
       curve: 'straight',
     },
     title: {
-      text: 'Fundamental Analysis of Stocks',
+      text: 'Projetos anteriores',
       align: 'left',
     },
     subtitle: {
-      text: 'Price Movements',
+      text: 'Historico de trabalho do freelancer',
       align: 'left',
     },
     labels: series.monthDataSeries1.dates,
@@ -48,7 +48,7 @@ const grafico = () => {
   // Definir os dados de série
   const chartData = [
     {
-      name: 'STOCK ABC',
+      name: 'projetos feitos no mês',
       data: series.monthDataSeries1.prices,
     },
   ];
