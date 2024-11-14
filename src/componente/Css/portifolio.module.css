@@ -18,9 +18,8 @@
 
 .historico {
     overflow: auto;
-    padding: 20px;
-    width: 44vw;
-    height: 60vh;
+    width: 47.5vw;
+    height: 70vh;
     background-color: #EFEFEF;
     justify-content: center;
     align-items: center;

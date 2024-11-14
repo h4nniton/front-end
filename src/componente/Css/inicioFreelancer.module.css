@@ -1,3 +1,13 @@
+.perfil{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.avaliacoes h2{
+    text-align: left;
+}
+
 .portfolio{
     background-color: #03396C;
     width: 15vw;
@@ -12,4 +22,45 @@
     display: flex;
     flex-direction: row;
     gap: 24px;
+}
+
+.comentario{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: auto;
+    height: 30vh;
+}
+
+
+.avaliacao{
+    display: flex;
+    flex-direction: column;
+    border: black solid 1px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.avaliacao p{
+    text-align: left;
+    padding: 10px;
+}
+
+.detalhes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+.empresa{
+    display: flex;
+    flex-direction: row;
+     gap: 20px;
+     align-items: center;
+}
+
+.estrela{
+    width: 180px;
+    height: 40px;
 }
