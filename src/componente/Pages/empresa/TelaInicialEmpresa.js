@@ -1,4 +1,4 @@
-import HeaderOficial from '../../Bases/HeaderOficial.js'
+import HeaderOficial2 from '../../Bases/HeaderOficial2.js'
 import NavBar from '../../Bases/NavBar2.js'
 import style from '../../Css/telaInicial2.module.css'
 import img from '../../img/image 1.png'
@@ -14,7 +14,7 @@ function TelaInicial() {
     return (
 
         <div className={style.telas}>
-            <HeaderOficial />
+            <HeaderOficial2 />
             <div className={style.navegacao}>
                 <NavBar />
 

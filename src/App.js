@@ -21,7 +21,10 @@ import Portfolio from './componente/Pages/empresa/Portfolio.js';
 import ProjetosHistorico from './componente/Pages/empresa/ProjetosHistorico.js';
 import InicioFreelancer from './componente/Pages/empresa/InicioFreelancer.js';
 import Chat from './componente/Pages/chat/Chat.js';
-
+import projetosFreelas from './componente/Pages/freelancer/Projetosfreelas.js'
+import notificacoesFreelas from './componente/Pages/freelancer/ntificacoesFreelas.js';
+import mensagensFreelas from './componente/Pages/freelancer/MensagensFreelas.js';
+import EditarPerfil from './componente/Pages/EditarPerfil.js';
 
 
 
@@ -51,6 +54,11 @@ function App() {
           <Route path='/ProjetosHistorico' element={<ProjetosHistorico />}></Route>
           <Route path='/Inicio' element={<InicioFreelancer />}></Route>
           <Route path='/Chat' element={<Chat />}></Route>
+          <Route path='/ProjetosFreelancer' element={<projetosFreelas />}></Route>
+          <Route path='/NotificacoesFreelancer' element={<notificacoesFreelas />}></Route>
+          <Route path='/MensagensFreelancer' element={<mensagensFreelas />}></Route>
+          <Route path='/Editar-Perfil' element={<EditarPerfil />}></Route>
+
 
         </Routes>
       </Router>
