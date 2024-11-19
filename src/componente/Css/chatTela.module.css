@@ -25,20 +25,20 @@
     width: 80%;
 }
 .chatColumn{
-    height: 100%;
+    height: 75vh;
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
 }
 /* CARD DO CONTATO */
 .contactCard{
     height: 80px;
     width: 100%;
     display: flex;
-    background: #03396C;
-    gap: 15px;
+    background: #8cc3f7;
+    gap: 20px;
 }
 .contactCard :hover{
-    background: #03396C;
+    background: #94c7f7;
 }
 /* FOTO DO CONTATO */
 .photoBox{
