@@ -91,3 +91,11 @@
     border-radius: 2rem;
     color: white !important;
 }
+
+.editar {
+    width: 30px;
+    height: 30px;
+    align-self: flex-end;
+    padding: 20px;
+    cursor: pointer;
+}

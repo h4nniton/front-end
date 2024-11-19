@@ -12,7 +12,6 @@ function TelaInicial() {
     return (
         
         <div className={style.telas}>
-            <div>jessica</div>
             <HeaderOficial />
             <div className={style.navegacao}>
                 <NavBar />
@@ -70,6 +69,8 @@ function TelaInicial() {
                                 </div>
                             </div>
                         </div>
+
+                     
 
 
                         <div className={style.card}>

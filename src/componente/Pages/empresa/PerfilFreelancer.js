@@ -3,8 +3,8 @@ import Inicio from './InicioFreelancer.js'
 import Projetos from './ProjetosHistorico.js'
 import Portfolio from './Portfolio.js'
 
-
-import NavBar from '../../Bases/NavBar2.js'
+import editar from '../../img/ferramenta-lapis.png'
+import NavBar from '../../Bases/NavBar.js'
 import img from '../../img/image 1.png'
 import estrelas from '../../img/avaliacao.png'
 import style from '../../Css/perfilFreelancer.module.css'
@@ -29,6 +29,9 @@ function PerfilFreelancer() {
             <div className={style.navegacao}>
                 <NavBar />
                 <div className={style.perfil}>
+                    <img className={style.editar} src={editar} onClick={() => {
+                        navigate('/Editar-Perfil')
+                    }}></img>
                     <img src={img}></img>
                     <h1>Afonso</h1>
                     <img src={estrelas}></img>

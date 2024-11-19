@@ -15,7 +15,7 @@ function HeaderOficial() {
 
                 <div className={styles.user}>
                     <p>Nome usuario</p>
-                    <img src={img} onClick={() => navigate('/PerfilFreelancer')} ></img>
+                    <img src={img} onClick={() => navigate('/PerfilEmpresa')} ></img>
                 </div>
             </div>
 
