@@ -24,6 +24,7 @@ import Chat from './componente/Pages/chat/Chat.js';
 import projetosFreelas from './componente/Pages/freelancer/Projetosfreelas.js'
 import notificacoesFreelas from './componente/Pages/freelancer/ntificacoesFreelas.js';
 import mensagensFreelas from './componente/Pages/freelancer/MensagensFreelas.js';
+import EditarPerfil from './componente/Pages/EditarPerfil.js';
 
 
 
@@ -56,6 +57,7 @@ function App() {
           <Route path='/ProjetosFreelancer' element={<projetosFreelas />}></Route>
           <Route path='/NotificacoesFreelancer' element={<notificacoesFreelas />}></Route>
           <Route path='/MensagensFreelancer' element={<mensagensFreelas />}></Route>
+          <Route path='/Editar-Perfil' element={<EditarPerfil />}></Route>
 
 
         </Routes>
