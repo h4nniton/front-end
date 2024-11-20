@@ -1,0 +1,10 @@
+.tela{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    gap: 200px;
+}
+
+.chat{
+    height: 50vh;
+}
