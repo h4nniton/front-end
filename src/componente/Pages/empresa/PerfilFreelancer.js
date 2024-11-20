@@ -40,10 +40,11 @@ function PerfilFreelancer() {
                         navigate('/Mensagens')
                     }}>enviar proposta particular</button>
                     <p>categorias</p>
-                    <div></div>
+                    <div className={style.card}>Front-End</div>
                     <p>habilidade</p>
-                    <div></div>
+                    <div className={style.card}>JavaScript</div>
                     <p>nível</p>
+                    <div className={style.card}>Experiente</div>
                 </div>
 
                 <div className={style.detalhe}> 
