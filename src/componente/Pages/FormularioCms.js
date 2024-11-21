@@ -1,5 +1,5 @@
 import FormularioBase from '../Bases/FormularioBase.js'
-import styles from '../Css/formularioCms.module.css'
+import styles from '../Css/formulario.module.css'
 import Footer from '../Bases/FooterCms.js';
 
 

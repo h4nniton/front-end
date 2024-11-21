@@ -1,22 +1,15 @@
-import img from '../img/avatar.avif';
+import img from '../img/avatar.png';
+import style from '../Css/profileFoto.module.css'
 
 function ProfilePhoto({ freelancer }) {
     const defaultPhoto = img;
 
     return (
-        <div>
-            {freelancer?.foto_perfil ? (
-                <img
-                    src={freelancer.foto_perfil}
-                    alt={`${freelancer?.nome_freelancer || "Usuário Padrão"}`}
-                />
-            ) : (
-                <img 
-                    src={defaultPhoto} 
-                    alt="Foto padrão do usuário"
-                />
-            )}
-        </div>
+        <img
+            src={freelancer?.foto_perfil || defaultPhoto}
+            alt={freelancer?.nome_freelancer || "Usuário Padrão"}
+            className={style.profilePhoto}
+        />
     );
 }
 

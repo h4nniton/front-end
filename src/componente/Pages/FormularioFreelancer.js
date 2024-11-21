@@ -1,5 +1,5 @@
 import FormularioBase from '../Bases/FormularioBase'
-import styles from '../Css/formularioFreelancer.module.css'
+import styles from '../Css/formulario.module.css'
 import Footer from '../Bases/FooterFreelancer';
 
 

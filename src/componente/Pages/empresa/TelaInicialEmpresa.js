@@ -71,11 +71,10 @@ const Usuarios = () => {
                         {freelancers.length > 0 ? (
                             freelancers.map((freelancer) => (
                                 <div key={freelancer.id} className={style.card} >
-                                    <Link to={`/freelancer/${freelancer.id}`}>
+                                    <Link to={`/freelancer/${freelancer.id}`} className={style.link}>
                                         <div className={style.infoPerfil}>
-                                            <img src={<ProfilePhoto />}
-                                                alt={`${freelancer.nome_freelancer || "Usuário Padrão"}`}
-                                                className={style.profilePhoto} />
+                                        <ProfilePhoto freelancer={freelancer} />
+
                                             <div className={style.a}>
                                                 <h2>{freelancer.nome_freelancer}</h2>
                                                 <StarRating rating={Math.round(freelancer.avaliacao)} />

@@ -13,20 +13,39 @@
     width: 90%;
     gap: 50px;
     width: 90%;
-    
 }
 
-input {
+.formulario input {
     border-radius: 7px;
     width: 551px;
     height: 40px;
-    border: none;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    border: none;   
     padding-left: 25px;
+    background: none;
+    background-color: #F6F6F6;
+
 }
 
 .tela{
     display: flex;
     flex-direction: row;
     gap: 50%;
+}
+
+.eye{
+    width: 24px;
+    cursor: pointer;
+}
+
+.pai{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 7px;
+    width: 551px;
+    height: 40px;
+    border: none;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    background-color: #F6F6F6;
+
 }

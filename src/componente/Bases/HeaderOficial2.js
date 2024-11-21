@@ -1,6 +1,6 @@
 import styles from '../Css/HeaderOficial.module.css'
 import image from '../img/Logo.png'
-import img from "../img/avatar.avif"
+import img from "../img/avatar.png"
 import { useNavigate } from 'react-router-dom'
 
 

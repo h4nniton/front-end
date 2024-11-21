@@ -65,7 +65,8 @@
 
 .navigate {
     display: flex;
-    
+    align-items: center;
+    justify-content: center;
     background-color: #FFFFFF;
     -webkit-box-shadow: 0px 17px 37px -6px rgba(117, 115, 117, 1);
     -moz-box-shadow: 0px 17px 37px -6px rgba(117, 115, 117, 1);
@@ -73,7 +74,7 @@
     border-radius: 20px;
     padding: 10px;
     gap: 10px;
-    width: 30vw;
+    width: 28vw;
 }
 
 .navigate li {

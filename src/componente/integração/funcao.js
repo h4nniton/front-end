@@ -1,14 +1,23 @@
 export async function postCliente(cliente) {
-    const url = `http://localhost:8080/v1/jinni/cliente`
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cliente)
+    try {
+
+        const url = `http://localhost:8080/v1/jinni/cliente`
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-type': 'Application/json',
+            },
+            body: JSON.stringify(cliente)
+        }
+        const response = await fetch(url, options)
+        const data = await response.json()
+        console.log("data",data);
+
+        return data
+    } catch (error) {
+        console.log(error);
+        return false
     }
-    const response = await fetch(url, options)
-    return response.ok
 }
 
 export async function postFreelancer(freelancer) {
@@ -33,7 +42,6 @@ export async function postFreelancer(freelancer) {
     }
 
 }
-
 
 export async function getCategoria() {
     const url = 'http://localhost:8080/v1/jinni/categorias'

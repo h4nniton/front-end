@@ -12,12 +12,18 @@
 .infoPerfil{
     display: flex;
     flex-direction: row;
+    gap: 20px;
+    text-align: start;
 }
 
 .a{
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.link{
+    text-decoration: none;
 }
 
 
