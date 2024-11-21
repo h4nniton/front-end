@@ -9,6 +9,18 @@
     gap: 30px;
 }
 
+.infoPerfil{
+    display: flex;
+    flex-direction: row;
+}
+
+.a{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
 .pi{
     display: flex;
     overflow: auto;
@@ -25,7 +37,7 @@
 .navegacao{
     display: flex;
     flex-direction: row;
-    gap: 5%;
+    gap: 7%;
     align-items: center;
 }
 
@@ -35,10 +47,11 @@
     background: linear-gradient(0deg, rgba(1,31,75,1) 35%, rgba(3,57,108,1) 100%);
     align-items: start;
     display: flex;
+    gap: 10%;
     flex-direction: column;
     padding-left: 20px;
     padding-right: 10px;
-    padding-top: px;
+    padding-top: 20px;
     border-radius: 10px;
     cursor: pointer;
 
@@ -52,6 +65,11 @@
 
 }
 
+.profilePhoto{
+    width: 5vw;
+    height: 5vh;
+}
+
 .card p{
     font-size: 15px;
     text-align: start;
@@ -62,14 +80,20 @@
 }
 
 .habilidade{
-    width: 3vw;
+    width: 8vw;
     height: 3vh;
     background-color: white;
     border-radius: 10px;
     display: flex;
+    color: black;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.habilidade p{
+    color: black;
+    font-weight: 500;
 }
 
 

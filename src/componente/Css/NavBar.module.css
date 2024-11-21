@@ -4,8 +4,8 @@
     align-items: center ;
     justify-content: space-evenly;
     background-color: #011F4B;
-    height: 85vh;
-    width: 6vw;
+    height: 85.5vh;
+    width: 5vw;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -15,7 +15,7 @@
 }
 
 .img{
-    width: 3vh;
-    height: 40%;
+    width: 1.5vw;
+    height: 50%;
     cursor: pointer;
 }
