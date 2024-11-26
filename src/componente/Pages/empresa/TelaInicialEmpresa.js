@@ -6,21 +6,35 @@ import { useNavigate } from 'react-router-dom'
 import { getFreelancers } from '../../integração/funcao.js'
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import EmptyStar from '../../img/estrelaVaziaBranca.png'
+import FullStar from '../../img/estralaCheiaBranca.png'
 
 
 // Componente para exibir estrelas
-const StarRating = ({ rating }) => {
-    const maxStars = 5; // Número máximo de estrelas
+const StarRating = ({ freelancers }) => {
+    const maxStars = 5; 
+  
+    // Verificar se 'avaliacao' existe e pegar a nota de estrelas do primeiro avaliador
+    const rating = freelancers?.avaliacao?.[0]?.estrelas ?? 0; 
+    
+    console.log(freelancers.avaliacao);
+    // Se não existir, atribui 0
+  
     return (
-        <div className={style.stars}>
-            {Array.from({ length: maxStars }, (_, index) => (
-                <span key={index}>
-                    {index < rating ? '★' : '☆'} {/* Preenche estrelas conforme a avaliação */}
-                </span>
-            ))}
-        </div>
+      <div className={style.stars}>
+        {Array.from({ length: maxStars }).map((_, index) => (
+          <span key={index}>
+            {index < rating ? (
+              <img className={style.star} src={FullStar} alt="Star Full" />
+            ) : (
+              <img className={style.star} src={EmptyStar} alt="Star Empty" />
+            )}
+          </span>
+        ))}
+      </div>
     );
-};
+  };
+  
 
 
 
@@ -81,7 +95,7 @@ const Usuarios = () => {
                                             </div>
 
                                         </div>
-                                        <p>{freelancer.descricao}</p>
+                                        <p className={style.p}>{freelancer.descricao ? freelancer.descricao : "descrição não informada" }</p>
                                         <div className={style.habilidade}>
                                             <p>  {freelancer.habilidades && freelancer.habilidades.length > 0
                                                 ? freelancer.habilidades[0].nome_habilidade

@@ -1,4 +1,7 @@
-
+.star{
+    width: 40px;
+    height: 40px;
+}
 .telas{
     display: flex;
     flex-direction: column;
@@ -24,6 +27,9 @@
 
 .link{
     text-decoration: none;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
 }
 
 
@@ -76,13 +82,17 @@
     height: 5vh;
 }
 
-.card p{
+
+.p{
     font-size: 15px;
     text-align: start;
     font-family: "Poppins", sans-serif;
     font-weight: 200;
     font-style: normal;
     color: white;
+    display: flex;
+    flex-wrap: wrap;
+    width: 20vw;
 }
 
 .habilidade{
