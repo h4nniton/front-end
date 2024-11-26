@@ -11,14 +11,9 @@ import FullStar from '../../img/estralaCheiaBranca.png'
 
 
 // Componente para exibir estrelas
-const StarRating = ({ freelancers }) => {
+const StarRating = ({ freelancer }) => {
     const maxStars = 5; 
-  
-    // Verificar se 'avaliacao' existe e pegar a nota de estrelas do primeiro avaliador
-    const rating = freelancers?.avaliacao?.[0]?.estrelas ?? 0; 
-    
-    console.log(freelancers.avaliacao);
-    // Se não existir, atribui 0
+    const rating = freelancer?.avaliacao[0].estrelas; 
   
     return (
       <div className={style.stars}>
