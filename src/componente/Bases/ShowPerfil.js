@@ -10,7 +10,7 @@ import Portfolio from '../Pages/empresa/Portfolio';
 import Projetos from '../Pages/empresa/ProjetosHistorico';
 
 const FreelancerDetails = () => {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [freelancer, setFreelancer] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -53,9 +53,13 @@ const FreelancerDetails = () => {
                 <NavBar2 />
                 <div className={style.perfil}>
                     <ProfilePhoto freelancer={freelancer} />
-                    <h1>{freelancer.freelancer?.nome_freelancer}</h1>
+                    <h1>{freelancer.freelancers && freelancer.freelancers.length > 0
+                        ? freelancer.freelancers[0].nome_freelancer
+                        : "Not found"}</h1>
                     <img src={estrelas} alt="Avaliação" />
-                    <p className={style.descricao}>{freelancer.descricao}</p>
+                    <p className={style.descricao}>{freelancer.freelancers && freelancer.freelancers.length > 0
+                        ? freelancer.freelancers[0].descricao
+                        : "Not found"}</p>
                     <button
                         className={style.botao}
                         onClick={() => navigate('/Mensagens')}
@@ -65,18 +69,28 @@ const FreelancerDetails = () => {
 
                     <p>Categorias</p>
                     <div className={style.card}>
+                        <img src={freelancer.freelancers && freelancer.freelancers.length > 0
+                            ? freelancer.freelancers[0].categorias[0].icon_categoria
+                            : "Not found"} />
+
+
                         <p>
-                            {freelancer.categoria && freelancer.categoria.length > 0
-                                ? freelancer.categoria[0].categoria
+                            {freelancer.freelancers && freelancer.freelancers.length > 0
+                                ? freelancer.freelancers[0].categorias[0].nome_categoria
                                 : "Not found"}
                         </p>
                     </div>
 
                     <p>Habilidades</p>
                     <div className={style.card}>
+                        <img src={freelancer.freelancers && freelancer.freelancers.length > 0
+                            ? freelancer.freelancers[0].habilidades[0].icon_habilidade
+                            : "Not found"} />
+
+
                         <p>
-                            {freelancer.habilidades && freelancer.habilidades.length > 0
-                                ? freelancer.habilidades[0].nome_habilidade
+                            {freelancer.freelancers && freelancer.freelancers.length > 0
+                                ? freelancer.freelancers[0].habilidades[0].nome_habilidade
                                 : "Not found"}
                         </p>
                     </div>
@@ -89,9 +103,9 @@ const FreelancerDetails = () => {
                         <li onClick={(e) => changeScreen(3, e)}>Projetos</li>
                     </ul>
                     <div>
-                        {currentScreen === 1 && <Inicio style={style} />}
-                        {currentScreen === 2 && <Portfolio style={style} />}
-                        {currentScreen === 3 && <Projetos style={style} />}
+                        {currentScreen === 1 && <Inicio style={style} key={freelancer.id}/>}
+                        {currentScreen === 2 && <Portfolio style={style} key={freelancer.id}/>}
+                        {currentScreen === 3 && <Projetos style={style} key={freelancer.id}/>}
                     </div>
                 </div>
             </div>

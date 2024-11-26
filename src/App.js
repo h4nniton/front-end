@@ -15,7 +15,7 @@ import FimCadastro from './componente/Pages/FimCadastro.js';
 import Projetos from './componente/Pages/empresa/Projetos.js'
 import Notificacoes from './componente/Pages/empresa/Notificacoes.js'
 import Mensagens from './componente/Pages/empresa/Mensagens.js'
-import PerfilFreelancer from './componente/Pages/empresa/PerfilFreelancer.js';
+import PerfilFreelancer from './componente/Pages/freelancer/PerfilFreelancer.js';
 import perfilEmpresa from './componente/Pages/empresa/PerfilEmpresa.js';
 import Portfolio from './componente/Pages/empresa/Portfolio.js';
 import ProjetosHistorico from './componente/Pages/empresa/ProjetosHistorico.js';

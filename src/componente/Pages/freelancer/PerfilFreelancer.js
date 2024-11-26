@@ -1,7 +1,7 @@
 import HeaderOficial from '../../Bases/HeaderOficial.js'
-import Inicio from './InicioFreelancer.js'
-import Projetos from './ProjetosHistorico.js'
-import Portfolio from './Portfolio.js'
+import Inicio from '../empresa/InicioFreelancer.js'
+import Projetos from '../empresa/ProjetosHistorico.js'
+import Portfolio from '../empresa/Portfolio.js'
 
 import editar from '../../img/ferramenta-lapis.png'
 import NavBar2 from '../../Bases/NavBar2.js'
@@ -10,6 +10,7 @@ import estrelas from '../../img/avaliacao.png'
 import style from '../../Css/perfilFreelancer.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+
 
 
 function PerfilFreelancer() {
