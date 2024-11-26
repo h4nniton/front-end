@@ -11,25 +11,25 @@ import FullStar from '../../img/estralaCheiaBranca.png'
 
 
 // Componente para exibir estrelas
-const StarRating = ({ freelancer }) => {
-    const maxStars = 5; 
-    const rating = freelancer?.avaliacao[0].estrelas; 
-  
+const StarRating = ({ rating }) => {
+    const maxStars = 5;
+
     return (
-      <div className={style.stars}>
-        {Array.from({ length: maxStars }).map((_, index) => (
-          <span key={index}>
-            {index < rating ? (
-              <img className={style.star} src={FullStar} alt="Star Full" />
-            ) : (
-              <img className={style.star} src={EmptyStar} alt="Star Empty" />
-            )}
-          </span>
-        ))}
-      </div>
+        <div className={style.stars}>
+            {Array.from({ length: maxStars }).map((_, index) => (
+                <span key={index}>
+                    {index < rating ? (
+                        <img className={style.star} src={FullStar} alt="Star Full" />
+                    ) : (
+                        <img className={style.star} src={EmptyStar} alt="Star Empty" />
+                    )}
+                </span>
+            ))}
+        </div>
     );
-  };
-  
+};
+
+
 
 
 
@@ -82,19 +82,21 @@ const Usuarios = () => {
                                 <div key={freelancer.id} className={style.card} >
                                     <Link to={`/freelancer/${freelancer.id}`} className={style.link}>
                                         <div className={style.infoPerfil}>
-                                        <ProfilePhoto freelancer={freelancer} />
+                                            <ProfilePhoto freelancer={freelancer} />
 
                                             <div className={style.a}>
                                                 <h2>{freelancer.nome_freelancer}</h2>
-                                                <StarRating rating={Math.round(freelancer.avaliacao)} />
+                                                <StarRating rating={Math.round(freelancer.avaliacao[0]?.estrelas || 0)} />
                                             </div>
 
                                         </div>
-                                        <p className={style.p}>{freelancer.descricao ? freelancer.descricao : "descrição não informada" }</p>
+                                        <p className={style.p}>{freelancer.descricao ? freelancer.descricao : "descrição não informada"}</p>
                                         <div className={style.habilidade}>
+                                            <img src={freelancer.habilidades && freelancer.habilidades.length > 0 ? freelancer.habilidades[0].icon_habilidade : 'not found'}></img>
                                             <p>  {freelancer.habilidades && freelancer.habilidades.length > 0
                                                 ? freelancer.habilidades[0].nome_habilidade
                                                 : "not found"} </p>
+
                                         </div>
 
                                     </Link>
