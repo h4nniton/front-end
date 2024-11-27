@@ -13,7 +13,11 @@ function EventoLogin() {
         let logado = false
         
         if (emailCampo === '' || senhaCampo === '') {
-            alert('Dados necessários não preenchidos!')
+            MySwal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo está faltando, preencha e tente novamente",
+              });
         } else {
             try {
                 const getClientes = await fetch('http://localhost:8080/v1/jinni/clientes')
@@ -48,7 +52,11 @@ function EventoLogin() {
 
 
                 if (!logado) {
-                    alert('Login invalido')
+                    MySwal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Algo deu errado, confirme se preencheu tudo corretamente e tente novamente",
+                      });
                 }
 
 

@@ -13,10 +13,18 @@ function EventoCadastro() {
         const cpfCampo = document.getElementById('cnpj').value
 
         if (nomeCampo == '' || cpfCampo == '' || emailCampo == '' || senhaCampo == '' || confirmarcaoCampo == '') {
-            alert('Preencha os campos corretamente!')
+            Swal.fire({
+                title: "Algo errado",
+                text: "algo está faltando preencha tudo corretamente ",
+                icon: "warning",
+              })
         } else {
             if (confirmarcaoCampo != senhaCampo) {
-                alert('Senhas incompativeis')
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "senhas incompativeis, tente novamente",
+                  });
             } else{
                 let validarCadastro = '';
 
@@ -34,7 +42,11 @@ function EventoCadastro() {
                         if (validarCadastro.status_code == 201) {
                             let id_cliente = resultCadastro.cliente.id_cliente
                             console.log(id_cliente);
-                            alert('Cadastro concluído!')
+                            Swal.fire({
+                                title: "Bem vindo!",
+                                text: "Sua conta foi criada com sucesso",
+                                icon: "success"
+                              });
                             navigate('/TelaInicial2', {state: {id_cliente: id_cliente}})
 
                         } else {
@@ -42,7 +54,11 @@ function EventoCadastro() {
                         }
 
                     } catch (error) {
-                        alert('⚠︎ Erro')
+                        MySwal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Email ou cpf já cadastrado!",
+                          });
                         console.log(error);
                     }
 

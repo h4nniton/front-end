@@ -29,15 +29,27 @@ function EventoCadastro() {
         const dataNascimentoCampo = document.getElementById('dataNascimento').value
 
         if (nomeCampo == '' || dataNascimentoCampo == '' || cpfCampo == '' || emailCampo == '' || senhaCampo == '' || confirmarcaoCampo == '') {
-            alert('Preencha os campos corretamente!')
+            Swal.fire({
+                title: "Algo errado",
+                text: "algo está faltando preencha tudo corretamente ",
+                icon: "warning",
+              })
         } else {
             if (confirmarcaoCampo != senhaCampo) {
-                alert('Senhas incompativeis')
+                MySwal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "senhas incompativeis, tente novamente",
+                  });
             } else {
                 const adulto = eAdulto(dataNascimentoCampo)
 
                 if (!adulto) {
-                    alert("O usuário é menor de 18. Pode não!")
+                    MySwal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Menores de idade não podem ser cadastrados",
+                      });
                 } else {
                     let validarCadastro = '';
 
@@ -56,7 +68,11 @@ function EventoCadastro() {
                         if (validarCadastro.status_code == 201) {
                             let id_freelancer = resultCadastro.freelancer.id_freelancer
                             console.log(id_freelancer);
-                            alert('Cadastro concluído!')
+                            Swal.fire({
+                                title: "Bem vindo freelancer!",
+                                text: "Sua conta foi criada com sucesso",
+                                icon: "success"
+                              });
                             navigate('/CriacaoDePerfil', {state: {id_freelancer: id_freelancer}})
 
                         } else {
@@ -64,7 +80,11 @@ function EventoCadastro() {
                         }
 
                     } catch (error) {
-                        alert('⚠︎ Erro')
+                        MySwal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Email ou cpf já cadastrado!",
+                          });
                         console.log(error);
                     }
 

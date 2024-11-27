@@ -44,3 +44,9 @@ const Star = ({isActive, onClick}: Props) => {
 }
 
 export default Star
+
+
+
+
+
+instalar o sweet alert:  npm install sweetalert2
