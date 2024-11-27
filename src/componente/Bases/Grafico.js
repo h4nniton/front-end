@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ApexCharts from 'react-apexcharts';
+import axios from 'axios'; 
 
 const BarChartComponent = () => {
+  const [chartData, setChartData] = useState({
+    series: [],
+    categories: [],
+  });
+
+  const fetchChartData = async () => {
+    try {
+      // Faça a chamada para sua API
+      const response = await axios.get('http://localhost:8080/v1/jinni/freelancers'); // Substitua pela sua URL
+      const data = response.data;
+
+      // Transforme os dados recebidos no formato esperado pelo gráfico
+      setChartData({
+        series: [
+          {
+            name: "finalizados",
+            data: data.finalizados, // Exemplo: [44, 55, 57, 56, 61, ...]
+          },
+          {
+            name: "em andamento",
+            data: data.emAndamento, // Exemplo: [76, 85, 101, ...]
+          },
+          {
+            name: "em negociacao",
+            data: data.emNegociacao, // Exemplo: [35, 41, 36, ...]
+          },
+        ],
+        categories: data.categories, // Exemplo: ["Feb", "Mar", "Apr", ...]
+      });
+    } catch (error) {
+      console.error("Erro ao buscar os dados do gráfico:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchChartData();
+  }, []);
+
   const options = {
     colors: ['#065EB1', '#03396C', '#011F4B'],
-    series: [
-      {
-        name: 'finalizados',
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-      },
-      {
-        name: 'em andamento',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-      },
-      {
-        name: 'em negociacao',
-        data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
-      },
-    ],
     chart: {
       type: 'bar',
       height: 350,
@@ -38,7 +63,7 @@ const BarChartComponent = () => {
       colors: ['transparent'],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      categories: chartData.categories, // Atualizado dinamicamente
     },
     yaxis: {
       title: {
@@ -51,7 +76,7 @@ const BarChartComponent = () => {
     tooltip: {
       y: {
         formatter: function (val) {
-          return  val + " trabalhos";
+          return val + " trabalhos";
         },
       },
     },
@@ -59,7 +84,11 @@ const BarChartComponent = () => {
 
   return (
     <div id="chart">
-      <ApexCharts options={options} series={options.series} type="bar" height={350} />
+      {chartData.series.length > 0 ? (
+        <ApexCharts options={options} series={chartData.series} type="bar" height={350} />
+      ) : (
+        <p>Carregando dados...</p> // Exibe enquanto os dados não chegam
+      )}
     </div>
   );
 };

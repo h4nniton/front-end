@@ -34,7 +34,7 @@ function EventoLogin() {
                     listaClientes.clientes.forEach((usuario) => {
                         if (emailCampo === usuario.email_cliente && senhaCampo === usuario.senha_cliente) {
                             logado = true
-                            navigate('/TelaInicial2')
+                            navigate('/TelaInicial2', {state: {id_empresa: id_empresa}})
                         }
                     })
                 }

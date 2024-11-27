@@ -2,11 +2,17 @@ import styles from '../Css/HeaderOficial.module.css'
 import image from '../img/Logo.png'
 import img from "../img/avatar.png"
 import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
+
+const { id } = useParams();
 function HeaderOficial() {
     const navigate = useNavigate();
+    
+
 
     return (
         <div>
@@ -15,7 +21,8 @@ function HeaderOficial() {
 
                 <div className={styles.user}>
                     <p>Nome usuario</p>
-                    <img src={img} onClick={() => navigate('/PerfilEmpresa')} ></img>
+                   <Link to={`/empresa/${empresa.id}`}>
+                   <img src={img} ></img></Link>
                 </div>
             </div>
 

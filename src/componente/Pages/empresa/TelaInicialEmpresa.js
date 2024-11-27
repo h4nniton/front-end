@@ -5,6 +5,7 @@ import ProfilePhoto from '../../Bases/profileFoto.js';
 import { getFreelancers } from '../../integração/funcao.js';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import EmptyStar from '../../img/estrelaVaziaBranca.png';
 import FullStar from '../../img/estralaCheiaBranca.png';
 
@@ -65,10 +66,11 @@ const Usuarios = () => {
     if (error) {
         return <div>{error}</div>; // Exibe mensagem de erro, se ocorrer
     }
+    const { id } = useParams();
 
     return (
         <div className={style.telas}>
-            <HeaderOficial2 />
+            <HeaderOficial2 key={id} />
             <div className={style.navegacao}>
                 <NavBar />
                 <div className={style.feed}>
