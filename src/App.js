@@ -16,7 +16,6 @@ import Projetos from './componente/Pages/empresa/Projetos.js'
 import Notificacoes from './componente/Pages/empresa/Notificacoes.js'
 import Mensagens from './componente/Pages/empresa/Mensagens.js'
 import PerfilFreelancer from './componente/Pages/freelancer/PerfilFreelancer.js';
-import perfilEmpresa from './componente/Pages/empresa/PerfilEmpresa.js';
 import Portfolio from './componente/Pages/empresa/Portfolio.js';
 import ProjetosHistorico from './componente/Pages/empresa/ProjetosHistorico.js';
 import InicioFreelancer from './componente/Pages/empresa/InicioFreelancer.js';
@@ -52,7 +51,6 @@ function App() {
           <Route path='/Notificacoes' element={<Notificacoes />}></Route>
           <Route path='/Mensagens' element={<Mensagens />}></Route>
           <Route path='/perfilFreelancer' element={<PerfilFreelancer />}></Route>
-          <Route path='/perfilEmpresa' element={<perfilEmpresa />}></Route>
           <Route path='/portfolio' element={<Portfolio />}></Route>
           <Route path='/ProjetosHistorico' element={<ProjetosHistorico />}></Route>
           <Route path='/Inicio' element={<InicioFreelancer />}></Route>
@@ -62,7 +60,7 @@ function App() {
           <Route path='/MensagensFreelancer' element={<mensagensFreelas />}></Route>
           <Route path='/Editar-Perfil' element={<EditarPerfil />}></Route>
           <Route path="/freelancer/:id" element={<FreelancerDetails />} />
-          <Route path="/cliente/:id" element={<FreelancerDetails />} />
+          <Route path="/cliente/:id" element={<EmpresaDetails />} />
 
 
 

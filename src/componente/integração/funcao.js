@@ -70,3 +70,12 @@ export async function getPortfolio() {
     const data = await response.json()
     return data
 }
+
+export async function getProjetos() {
+    const url = 'http://localhost:8080/v1/jinni/projetos'
+    const response = await fetch(url)
+    const data = await response.json()
+    return data
+}
+
+

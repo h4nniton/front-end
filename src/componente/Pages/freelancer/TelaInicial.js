@@ -1,363 +1,125 @@
-import HeaderOficial from '../../Bases/HeaderOficial.js'
-import NavBar from '../../Bases/NavBar.js'
-import style from '../../Css/telaInicial.module.css'
-import js from '../../img/jsIcon.png'
-import react from '../../img/reactIcon.png'
-import css from '../../img/cssIcon.png'
-import html from '../../img/htmlIcon.png'
-import kotlin from '../../img/kotlinIcon.png'
-import java from '../../img/javaIcon.png'
-import { useLocation } from 'react-router-dom';
+import HeaderOficial from '../../Bases/HeaderOficial.js';
+import NavBar from '../../Bases/NavBar.js';
+import style from '../../Css/telaInicial2.module.css';
+import ProfilePhoto from '../../Bases/profileFoto.js';
+import { getProjetos } from '../../integração/funcao.js';
+import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
+const Usuarios = () => {
+    const [projetos, setProjetos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-function TelaInicial() {
+    useEffect(() => {
+        const fetchProjetos = async () => {
+            try {
+                const proposta = await getProjetos();
+                if (proposta && Array.isArray(proposta.projetos)) {
+                    setProjetos(proposta.projetos);
+                } else {
+                    throw new Error('Dados de projetos inválidos.');
+                }
+            } catch (err) {
+                setError('Erro ao carregar Projetos.');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const location = useLocation();
-    const { id } = location.state || {};
+        fetchProjetos();
+    }, []);
+
+    const handleFreelancerClick = (freelancer) => {
+        // Exibir SweetAlert com detalhes do freelancer
+        Swal.fire({
+            title: freelancer.nome_freelancer,
+            html: `
+                <p><strong>Descrição:</strong> ${freelancer.descricao || 'Descrição não informada'}</p>
+                <p><strong>Habilidade:</strong> ${
+                    freelancer.habilidades && freelancer.habilidades.length > 0
+                        ? freelancer.habilidades[0].nome_habilidade
+                        : 'Não informado'
+                }</p>
+            `,
+            imageUrl: freelancer.habilidades && freelancer.habilidades.length > 0
+                ? freelancer.habilidades[0].icon_habilidade
+                : null,
+            imageWidth: 100,
+            imageHeight: 100,
+            confirmButtonText: 'Fechar',
+        });
+    };
+
+    if (loading) {
+        return <div>Carregando...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    const idEmp = localStorage.getItem('id');
+    console.log('ID recuperado no Usuarios:', idEmp);
+
     return (
-        
         <div className={style.telas}>
-            <HeaderOficial id={id} />
+            <HeaderOficial id={idEmp} />
             <div className={style.navegacao}>
                 <NavBar />
-                <div className={style.propostas}>
+                <div className={style.feed}>
                     <div className={style.pi}>
-                    <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
+                        {projetos.length > 0 ? (
+                            projetos.map((projeto) => {
+                                return (
+                                    <div
+                                        key={projeto.id}
+                                        className={style.card}
+                                        onClick={() => handleFreelancerClick(projeto)} // Chama a função ao clicar no card
+                                    >
+                                        <div className={style.infoPerfil}>
+                                            <ProfilePhoto projeto={projeto} />
+                                            <div className={style.a}>
+                                                <h2>{projeto.nome_projeto}</h2>
+                                            </div>
+                                        </div>
+                                        <p className={style.p}>
+                                            {projeto.descricao
+                                                ? projeto.descricao
+                                                : 'Descrição não informada'}
+                                        </p>
+                                        <div className={style.habilidade}>
+                                            <img
+                                                src={
+                                                    projeto.habilidades &&
+                                                    projeto.habilidades.length > 0
+                                                        ? projeto.habilidades[0].icon_habilidade
+                                                        : 'not found'
+                                                }
+                                                alt="Habilidade"
+                                            />
+                                            <p>
+                                                {projeto.habilidades &&
+                                                projeto.habilidades.length > 0
+                                                    ? projeto.habilidades[0].nome_habilidade
+                                                    : 'Não informado'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <div>
+                                <h2>Nenhum projeto encontrado.</h2>
                             </div>
-                        </div>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-                     
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={style.pi}>
-
-                    <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={style.pi}>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className={style.card}>
-                            <h2>Elabore</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna  amet, consectetur adipiscing elit. Donec ut consequat enim, vitae venenatis urna...</p>
-
-                            <div className={style.filho}>
-                                <div className={style.habilidade}>
-                                    <img src={js}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={react}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={css}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={html}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={kotlin}></img>
-                                </div>
-                                <div className={style.habilidade}>
-                                    <img src={java}></img>
-                                </div>
-                            </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
-
-
-
         </div>
-    )
-}
+    );
+};
 
-export default TelaInicial 
+export default Usuarios;

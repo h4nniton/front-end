@@ -2,12 +2,10 @@ import styles from '../Css/HeaderOficial.module.css';
 import image from '../img/Logo.png';
 import img from "../img/avatar.png";
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 function HeaderOficial({ id }) {
-    console.log(id);
-    
-    
+    console.log("ID recebido no HeaderOficial:", id);  // Verifique o valor de id
+
     const navigate = useNavigate();
 
     return (
@@ -25,17 +23,14 @@ function HeaderOficial({ id }) {
                     <p>Nome do Usuário</p>
                     
                     {/* Link para o perfil do cliente usando o ID fornecido */}
-                    <Link to={`/cliente/${id}`}>
-                        <img 
-                            src={img} 
-                            alt="Avatar do usuário" 
-                            className={styles.avatar} 
-                        />
-                    </Link>
+                        <img src={img} alt="Avatar do usuário"  onClick={() => navigate(`/cliente/${id}`)}/>
+                    
                 </div>
             </div>
         </div>
     );
 }
+
+
 
 export default HeaderOficial;

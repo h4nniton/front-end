@@ -3,11 +3,35 @@ import { useParams, useNavigate } from 'react-router-dom';
 import style from '../Css/perfilFreelancer.module.css';
 import HeaderOficial from '../Bases/HeaderOficial';
 import NavBar2 from '../Bases/NavBar2';
-import estrelas from '../img/avaliacao.png';
 import ProfilePhoto from '../Bases/profileFoto';
 import Inicio from '../Pages/empresa/InicioFreelancer';
 import Portfolio from '../Pages/empresa/Portfolio';
 import Projetos from '../Pages/empresa/ProjetosHistorico';
+import EmptyStar from '../img/estrelavaziaAzul.png';
+import FullStar from '../img/estrelaCheiaAzul.png';
+
+const StarRating = ({ rating }) => {
+    const maxStars = 5;
+    return (
+        <div className={style.stars}>
+            {Array.from({ length: maxStars }).map((_, index) => (
+                <span key={index}>
+                    {index < rating ? (
+                        <img className={style.star} src={FullStar} alt="Star Full" />
+                    ) : (
+                        <img className={style.star} src={EmptyStar} alt="Star Empty" />
+                    )}
+                </span>
+            ))}
+        </div>
+    );
+};
+
+const calculateAverageRating = (avaliacao) => {
+    if (!avaliacao || avaliacao.length === 0) return 0;
+    const totalStars = avaliacao.reduce((sum, a) => sum + a.estrelas, 0);
+    return totalStars / avaliacao.length;
+};
 
 const FreelancerDetails = () => {
     const { id } = useParams();
@@ -45,6 +69,7 @@ const FreelancerDetails = () => {
         event.currentTarget.classList.add(style.selecionado);
         setCurrentScreen(screen);
     };
+    const averageRating = Math.round(calculateAverageRating(freelancer.avaliacao));
 
     return (
         <div className={style.telas}>
@@ -56,7 +81,8 @@ const FreelancerDetails = () => {
                     <h1>{freelancer.freelancers && freelancer.freelancers.length > 0
                         ? freelancer.freelancers[0].nome_freelancer
                         : "Not found"}</h1>
-                    <img src={estrelas} alt="Avaliação" />
+                    <StarRating rating={averageRating} />
+
                     <p className={style.descricao}>{freelancer.freelancers && freelancer.freelancers.length > 0
                         ? freelancer.freelancers[0].descricao
                         : "Not found"}</p>
@@ -103,9 +129,9 @@ const FreelancerDetails = () => {
                         <li onClick={(e) => changeScreen(3, e)}>Projetos</li>
                     </ul>
                     <div>
-                        {currentScreen === 1 && <Inicio style={style} key={freelancer.id}/>}
-                        {currentScreen === 2 && <Portfolio style={style} key={freelancer.id}/>}
-                        {currentScreen === 3 && <Projetos style={style} key={freelancer.id}/>}
+                        {currentScreen === 1 && <Inicio style={style} key={freelancer.id} />}
+                        {currentScreen === 2 && <Portfolio style={style} key={freelancer.id} />}
+                        {currentScreen === 3 && <Projetos style={style} key={freelancer.id} />}
                     </div>
                 </div>
             </div>

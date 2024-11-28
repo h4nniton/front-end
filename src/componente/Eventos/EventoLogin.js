@@ -39,8 +39,9 @@ function EventoLogin() {
                     if (emailCampo === usuario.email_cliente && senhaCampo === usuario.senha_cliente) {
                         logado = true;
                         const id = usuario.id;
-                         // Recupera o id_empresa do cliente
-                        navigate('/TelaInicial2', { state: { id } });
+                        console.log("ID do cliente encontrado:", id); // Verificação
+                        localStorage.setItem("id", id);
+                        navigate('/TelaInicial2');
                     }
                 });
             }

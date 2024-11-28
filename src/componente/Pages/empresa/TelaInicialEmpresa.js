@@ -4,7 +4,6 @@ import style from '../../Css/telaInicial2.module.css';
 import ProfilePhoto from '../../Bases/profileFoto.js';
 import { getFreelancers } from '../../integração/funcao.js';
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import EmptyStar from '../../img/estrelaVaziaBranca.png';
 import FullStar from '../../img/estralaCheiaBranca.png';
@@ -36,9 +35,6 @@ const calculateAverageRating = (avaliacao) => {
 };
 
 const Usuarios = () => {
-    const location = useLocation();
-    const id = localStorage.getItem("id")
-    const { idEmp } = location.state || {};
     const [freelancers, setFreelancers] = useState([]);
     const [loading, setLoading] = useState(true); // Estado para controle de carregamento
     const [error, setError] = useState(null); // Estado para mensagens de erro
@@ -72,10 +68,12 @@ const Usuarios = () => {
         return <div>{error}</div>; // Exibe mensagem de erro, se ocorrer
     }
 
+    const idEmp = localStorage.getItem("id");
+    console.log("ID recuperado no Usuarios:", idEmp);
  
     return (
         <div className={style.telas}>
-            <HeaderOficial2 id = {id} />
+            <HeaderOficial2 id = {idEmp} />
             <div className={style.navegacao}>
                 <NavBar />
                 <div className={style.feed}>
