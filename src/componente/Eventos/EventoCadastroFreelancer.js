@@ -1,6 +1,8 @@
 import { postFreelancer } from "../integração/funcao.js"
 import styles from '../Css/footer.module.css'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
+
 
 
 function eAdulto(valorDataNascimento) {
@@ -36,7 +38,7 @@ function EventoCadastro() {
               })
         } else {
             if (confirmarcaoCampo != senhaCampo) {
-                MySwal.fire({
+                Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "senhas incompativeis, tente novamente",
@@ -45,7 +47,7 @@ function EventoCadastro() {
                 const adulto = eAdulto(dataNascimentoCampo)
 
                 if (!adulto) {
-                    MySwal.fire({
+                    Swal.fire({
                         icon: "error",
                         title: "Oops...",
                         text: "Menores de idade não podem ser cadastrados",
@@ -80,7 +82,7 @@ function EventoCadastro() {
                         }
 
                     } catch (error) {
-                        MySwal.fire({
+                        Swal  .fire({
                             icon: "error",
                             title: "Oops...",
                             text: "Email ou cpf já cadastrado!",

@@ -40,9 +40,10 @@ const Avaliacoes = () => {
         <ul>
           {avaliacoes.map((avaliacao) => (
             <li key={avaliacao.id} style={{ border: '1px solid #ddd', margin: '10px', padding: '10px' }}>
-              <h3>{avaliacao.nome_avaliador} ({avaliacao.tipo_avaliador})</h3>
-              <p>Estrelas: {avaliacao.estrelas} ⭐</p>
-              <p>Comentário: {avaliacao.comentario}</p>
+              <h3>{avaliacao[0].nome_avaliador} </h3>
+              <p>Estrelas: {avaliacao[0].estrelas} ⭐</p>
+              
+              <p>Comentário: {avaliacao[0].comentario}</p>
             </li>
           ))}
         </ul>

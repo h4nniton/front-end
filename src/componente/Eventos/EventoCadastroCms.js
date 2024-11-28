@@ -1,6 +1,8 @@
 import { postCliente } from "../integração/funcao.js"
 import styles from '../Css/footer.module.css'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
+
 
 
 function EventoCadastro() {
@@ -20,7 +22,7 @@ function EventoCadastro() {
               })
         } else {
             if (confirmarcaoCampo != senhaCampo) {
-                MySwal.fire({
+                Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "senhas incompativeis, tente novamente",
@@ -54,7 +56,7 @@ function EventoCadastro() {
                         }
 
                     } catch (error) {
-                        MySwal.fire({
+                        Swal.fire({
                             icon: "error",
                             title: "Oops...",
                             text: "Email ou cpf já cadastrado!",

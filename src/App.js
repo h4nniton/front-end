@@ -26,6 +26,8 @@ import notificacoesFreelas from './componente/Pages/freelancer/ntificacoesFreela
 import mensagensFreelas from './componente/Pages/freelancer/MensagensFreelas.js';
 import EditarPerfil from './componente/Pages/EditarPerfil.js';
 import FreelancerDetails from './componente/Bases/ShowPerfil.js'
+import EmpresaDetails from './componente/Pages/empresa/PerfilEmpresa.js'
+
 
 
 
@@ -60,6 +62,8 @@ function App() {
           <Route path='/MensagensFreelancer' element={<mensagensFreelas />}></Route>
           <Route path='/Editar-Perfil' element={<EditarPerfil />}></Route>
           <Route path="/freelancer/:id" element={<FreelancerDetails />} />
+          <Route path="/cliente/:id" element={<FreelancerDetails />} />
+
 
 
 

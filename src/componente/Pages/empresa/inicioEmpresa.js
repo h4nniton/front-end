@@ -1,5 +1,5 @@
 import img from '../../img/exemplo portifolio.png';
-import Style from '../../Css/inicioEmpresa.module.css'; // Alterado o arquivo de estilo
+import Style from '../../Css/IncioEmpresa.module.css'; // Alterado o arquivo de estilo
 import empresa from '../../img/empresa.png';
 import avaliacao from '../../img/avaliacao.png';
 import { useParams } from 'react-router-dom';

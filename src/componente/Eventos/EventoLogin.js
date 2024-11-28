@@ -1,70 +1,78 @@
-import styles from '../Css/footer.module.css'
-import { useNavigate } from 'react-router-dom'
-
+import styles from '../Css/footer.module.css';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function EventoLogin() {
     const navigate = useNavigate();
 
     async function meuEvento() {
-        const emailCampo = document.getElementById('email').value
-        const senhaCampo = document.getElementById('senha').value
-        
+        const emailCampo = document.getElementById('email').value;
+        const senhaCampo = document.getElementById('senha').value;
 
-        let logado = false
-        
+        let logado = false;
+
         if (emailCampo === '' || senhaCampo === '') {
-            MySwal.fire({
+            Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Algo está faltando, preencha e tente novamente",
-              });
-        } else {
-            try {
-                const getClientes = await fetch('http://localhost:8080/v1/jinni/clientes')
-                const getFreelancers = await fetch('http://localhost:8080/v1/jinni/freelancers')
-                const listaClientes = await getClientes.json()
-                const listaFreelancers = await getFreelancers.json()
+            });
+            return; // Interrompe a execução da função
+        }
 
-                console.log(listaClientes);
-                console.log(listaFreelancers);
-                
-                
+        try {
+            // Fetch das listas de clientes e freelancers
+            const [getClientes, getFreelancers] = await Promise.all([
+                fetch('http://localhost:8080/v1/jinni/clientes'),
+                fetch('http://localhost:8080/v1/jinni/freelancers')
+            ]);
 
-                if(listaClientes.clientes){
-                    listaClientes.clientes.forEach((usuario) => {
-                        if (emailCampo === usuario.email_cliente && senhaCampo === usuario.senha_cliente) {
-                            logado = true
-                            navigate('/TelaInicial2', {state: {id_empresa: id_empresa}})
-                        }
-                    })
-                }
+            const listaClientes = await getClientes.json();
+            const listaFreelancers = await getFreelancers.json();
 
-                if(listaFreelancers.freelancers){
-                    listaFreelancers.freelancers.forEach((usuario) => {
-                        if (emailCampo == usuario.email_freelancer && senhaCampo == usuario.senha_freelancer) {
-                            logado = true
-                            console.log(emailCampo);
-                            console.log(usuario.senha_freelancer);
-                            navigate('/TelaInicial')
-                        }
-                    })
-                }
+            console.log(listaClientes);
+            console.log(listaFreelancers);
 
-
-                if (!logado) {
-                    MySwal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Algo deu errado, confirme se preencheu tudo corretamente e tente novamente",
-                      });
-                }
-
-
-            } catch (error) {
-
-
-
+            // Validação dos clientes
+            if (listaClientes.clientes) {
+                listaClientes.clientes.forEach((usuario) => {
+                    if (emailCampo === usuario.email_cliente && senhaCampo === usuario.senha_cliente) {
+                        logado = true;
+                        const id = usuario.id;
+                         // Recupera o id_empresa do cliente
+                        navigate('/TelaInicial2', { state: { id } });
+                    }
+                });
             }
+
+            // Validação dos freelancers
+            if (listaFreelancers.freelancers) {
+                listaFreelancers.freelancers.forEach((usuario) => {
+                    if (emailCampo === usuario.email_freelancer && senhaCampo === usuario.senha_freelancer) {
+                        logado = true;
+                        const id = usuario.id;
+                        localStorage.setItem("id", id)
+                    
+                        navigate('/TelaInicial', {state:{ id }}); // Redireciona freelancers
+                    }
+                });
+            }
+
+            // Caso nenhum usuário seja encontrado
+            if (!logado) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Algo deu errado, confirme se preencheu tudo corretamente e tente novamente",
+                });
+            }
+        } catch (error) {
+            console.error("Erro ao buscar dados:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Erro de Conexão",
+                text: "Não foi possível conectar ao servidor. Tente novamente mais tarde.",
+            });
         }
     }
 
@@ -72,7 +80,7 @@ function EventoLogin() {
         <div>
             <button className={styles.button} onClick={meuEvento}>Continuar</button>
         </div>
-    )
+    );
 }
 
-export default EventoLogin
+export default EventoLogin;

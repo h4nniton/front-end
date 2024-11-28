@@ -7,12 +7,17 @@ import css from '../../img/cssIcon.png'
 import html from '../../img/htmlIcon.png'
 import kotlin from '../../img/kotlinIcon.png'
 import java from '../../img/javaIcon.png'
+import { useLocation } from 'react-router-dom';
+
 
 function TelaInicial() {
+
+    const location = useLocation();
+    const { id } = location.state || {};
     return (
         
         <div className={style.telas}>
-            <HeaderOficial />
+            <HeaderOficial id={id} />
             <div className={style.navegacao}>
                 <NavBar />
                 <div className={style.propostas}>

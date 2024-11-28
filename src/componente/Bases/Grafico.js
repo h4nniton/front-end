@@ -1,45 +1,54 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ApexCharts from 'react-apexcharts';
-import axios from 'axios'; 
+import axios from 'axios';
 
 const BarChartComponent = () => {
   const [chartData, setChartData] = useState({
     series: [],
     categories: [],
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { id } = useParams();
 
   const fetchChartData = async () => {
+    setLoading(true);
+    setError(null); // Reseta o estado de erro antes da requisição
+
     try {
-      // Faça a chamada para sua API
-      const response = await axios.get('http://localhost:8080/v1/jinni/freelancers'); // Substitua pela sua URL
+      const response = await axios.get(`http://localhost:8080/v1/jinni/freelancer/${id}`);
       const data = response.data;
 
-      // Transforme os dados recebidos no formato esperado pelo gráfico
+      // Certifique-se de que os dados estejam no formato esperado
       setChartData({
         series: [
           {
-            name: "finalizados",
-            data: data.finalizados, // Exemplo: [44, 55, 57, 56, 61, ...]
+            name: "Finalizados",
+            data: data.quantidade_finalizados || [], // Garantir array padrão
           },
           {
-            name: "em andamento",
-            data: data.emAndamento, // Exemplo: [76, 85, 101, ...]
+            name: "Em andamento",
+            data: data.quantidade_andamento || [], // Garantir array padrão
           },
           {
-            name: "em negociacao",
-            data: data.emNegociacao, // Exemplo: [35, 41, 36, ...]
+            name: "Em negociação",
+            data: data.quantidade_projetos || [], // Garantir array padrão
           },
         ],
-        categories: data.categories, // Exemplo: ["Feb", "Mar", "Apr", ...]
+        categories: data.categories || [], // Garantir array padrão
       });
-    } catch (error) {
-      console.error("Erro ao buscar os dados do gráfico:", error);
+    } catch (err) {
+      console.error("Erro ao buscar os dados do gráfico:", err);
+      setError("Não foi possível carregar os dados do gráfico.");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchChartData();
-  }, []);
+  }, [id]); // Atualiza quando o ID muda
 
   const options = {
     colors: ['#065EB1', '#03396C', '#011F4B'],
@@ -84,10 +93,12 @@ const BarChartComponent = () => {
 
   return (
     <div id="chart">
-      {chartData.series.length > 0 ? (
-        <ApexCharts options={options} series={chartData.series} type="bar" height={350} />
+      {loading ? (
+        <p>Carregando dados do gráfico...</p>
+      ) : error ? (
+        <p style={{ color: 'red' }}>{error}</p>
       ) : (
-        <p>Carregando dados...</p> // Exibe enquanto os dados não chegam
+        <ApexCharts options={options} series={chartData.series} type="bar" height={350} />
       )}
     </div>
   );

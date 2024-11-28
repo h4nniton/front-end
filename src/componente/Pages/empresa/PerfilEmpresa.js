@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import style from '../Css/perfilEmpresa.module.css'; // Altere o CSS se necessário
-import HeaderOficial2 from '../Bases/HeaderOficial2.js';
-import NavBar2 from '../Bases/NavBar2.js';
-import estrelas from '../img/avaliacao.png';
-import ProfilePhoto from '../Bases/profileFoto';
+import style from '../../Css/perfilEmpresa.module.css'
+import HeaderOficial2 from '../../Bases/HeaderOficial2.js'
+import NavBar2 from '../../Bases/NavBar2.js';
+import estrelas from '../../img/avaliacao.png';
+import ProfilePhoto from '../../Bases/profileFoto';
 import Inicio from './inicioEmpresa.js';
 import Portfolio from './PortfolioEmpresa.js';
 import Projetos from './ProjetosHistoricoEmpresa.js';
@@ -21,7 +21,7 @@ const EmpresaDetails = () => {
     useEffect(() => {
         const fetchEmpresaDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/v1/jinni/empresa/${id}`); // Ajuste o endpoint
+                const response = await fetch(`http://localhost:8080/v1/jinni/cliente/${id}`); // Ajuste o endpoint
                 if (!response.ok) throw new Error("Erro ao buscar dados");
                 const data = await response.json();
                 setEmpresa(data);
@@ -53,9 +53,9 @@ const EmpresaDetails = () => {
                 <NavBar2 />
                 <div className={style.perfil}>
                     <ProfilePhoto empresa={empresa} />
-                    <h1>{empresa.nome_empresa || "Not found"}</h1>
+                    <h1>{empresa.clientes[0].nome_cliente || "Not found"}</h1>                    
                     <img src={estrelas} alt="Avaliação" />
-                    <p className={style.descricao}>{empresa.descricao || "Not found"}</p>
+                    <p className={style.descricao}>{empresa.clientes[0].descricao || "Not found"}</p>
                     <button
                         className={style.botao}
                         onClick={() => navigate('/Mensagens')}
@@ -63,35 +63,7 @@ const EmpresaDetails = () => {
                         Enviar Mensagem
                     </button>
 
-                    <p>Categorias</p>
-                    <div className={style.card}>
-                        <img
-                            src={empresa.categorias && empresa.categorias.length > 0
-                                ? empresa.categorias[0].icon_categoria
-                                : "Not found"}
-                            alt="Categoria"
-                        />
-                        <p>
-                            {empresa.categorias && empresa.categorias.length > 0
-                                ? empresa.categorias[0].nome_categoria
-                                : "Not found"}
-                        </p>
-                    </div>
-
-                    <p>Especialidades</p>
-                    <div className={style.card}>
-                        <img
-                            src={empresa.especialidades && empresa.especialidades.length > 0
-                                ? empresa.especialidades[0].icon_especialidade
-                                : "Not found"}
-                            alt="Especialidade"
-                        />
-                        <p>
-                            {empresa.especialidades && empresa.especialidades.length > 0
-                                ? empresa.especialidades[0].nome_especialidade
-                                : "Not found"}
-                        </p>
-                    </div>
+                    
                 </div>
 
                 <div className={style.detalhe}>
@@ -101,9 +73,9 @@ const EmpresaDetails = () => {
                         <li onClick={(e) => changeScreen(3, e)}>Projetos</li>
                     </ul>
                     <div>
-                        {currentScreen === 1 && <Inicio style={style} key={empresa.id} />}
-                        {currentScreen === 2 && <Portfolio style={style} key={empresa.id} />}
-                        {currentScreen === 3 && <Projetos style={style} key={empresa.id} />}
+                        {currentScreen === 1 && <Inicio style={style} key={empresa.clientes[0].id} />}
+                        {currentScreen === 2 && <Portfolio style={style} key={empresa.clientes[0].id} />}
+                        {currentScreen === 3 && <Projetos style={style} key={empresa.clientes[0].id} />}
                     </div>
                 </div>
             </div>
