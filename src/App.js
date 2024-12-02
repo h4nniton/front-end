@@ -26,6 +26,8 @@ import mensagensFreelas from './componente/Pages/freelancer/MensagensFreelas.js'
 import EditarPerfil from './componente/Pages/EditarPerfil.js';
 import FreelancerDetails from './componente/Bases/ShowPerfil.js'
 import EmpresaDetails from './componente/Pages/empresa/PerfilEmpresa.js'
+import FreelancerPerfil from './componente/Pages/freelancer/PerfilFreelancer.js'
+
 
 
 
@@ -61,6 +63,8 @@ function App() {
           <Route path='/Editar-Perfil' element={<EditarPerfil />}></Route>
           <Route path="/freelancer/:id" element={<FreelancerDetails />} />
           <Route path="/cliente/:id" element={<EmpresaDetails />} />
+          <Route path="/Freelancer/:id" element={<FreelancerPerfil />} />
+
 
 
 

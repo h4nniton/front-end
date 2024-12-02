@@ -1,73 +1,100 @@
-import HeaderOficial from '../../Bases/HeaderOficial.js'
-import Inicio from '../empresa/InicioFreelancer.js'
-import Projetos from '../empresa/ProjetosHistorico.js'
-import Portfolio from '../empresa/Portfolio.js'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import style from '../../Css/perfilEmpresa.module.css';
+import HeaderOficial from '../../Bases/HeaderOficial.js';
+import NavBar from '../../Bases/NavBar.js';
+import estrelas from '../../img/avaliacao.png';
+import ProfilePhoto from '../../Bases/profileFoto';
+import Inicio from './inicioFreelancer.js';
+import Portfolio from './PortfolioFreelancer.js';
+import Projetos from './ProjetosHistoricoFreelancer.js';
 
-import editar from '../../img/ferramenta-lapis.png'
-import NavBar2 from '../../Bases/NavBar2.js'
-import img from '../../img/image 1.png'
-import estrelas from '../../img/avaliacao.png'
-import style from '../../Css/perfilFreelancer.module.css'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+const FreelancerDetails = () => {
+    const { id } = useParams(); // Pega o ID da URL
+    const [freelancer, setFreelancer] = useState(null); // Armazena os dados do freelancer
+    const [currentScreen, setCurrentScreen] = useState(1); // Gerencia a tela atual
+    const [loading, setLoading] = useState(true); // Estado de carregamento
+    const [error, setError] = useState(null); // Estado de erro
 
-
-
-function PerfilFreelancer() {
-    const navigate = useNavigate();
-    const [currentScreen, setCurrentScreen] = useState(1);
-
-    function changeScreen(screen, event) {
-        document.querySelectorAll(`.${style.selecionado}`).forEach(el => {
-            el.classList.remove(style.selecionado);
-        });
+    // Função para alternar entre as telas (Início, Portfólio, Projetos)
+    const changeScreen = (screen, event) => {
+        document.querySelectorAll(`.${style.selecionado}`).forEach((el) => el.classList.remove(style.selecionado));
         event.currentTarget.classList.add(style.selecionado);
         setCurrentScreen(screen);
-    }
+    };
+
+    // Busca os dados do freelancer ao carregar o componente
+    useEffect(() => {
+        const fetchFreelancerDetails = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/v1/jinni/freelancer/${id}`);
+                if (!response.ok) throw new Error('Erro ao buscar dados do freelancer');
+                const data = await response.json();
+                setFreelancer(data); // Define os dados do freelancer
+            } catch (err) {
+                setError('Erro ao carregar os dados do freelancer');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (id) {
+            fetchFreelancerDetails();
+        } else {
+            setError('ID do freelancer não fornecido');
+            setLoading(false);
+        }
+    }, [id]);
+
+    // Retorna mensagens de carregamento ou erro, se aplicável
+    if (loading) return <div>Carregando...</div>;
+    if (error) return <div>{error}</div>;
+    if (!freelancer) return <div>Freelancer não encontrado.</div>;
+
+    // Renderiza o componente principal
     return (
         <div className={style.telas}>
             <HeaderOficial />
             <div className={style.navegacao}>
-                <NavBar2 />
+                <NavBar />
                 <div className={style.perfil}>
-                    <img className={style.editar} src={editar} onClick={() => {
-                        navigate('/Editar-Perfil')
-                    }}></img>
-                    <img src={img}></img>
-                    <h1>Afonso</h1>
-                    <img src={estrelas}></img>
-                    <p className={style.descricao}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum blandit lorem quam. Aenean et urna et nibh posuere suscipit. Sed gravida pellentesque mi sed gravida. Morbi pellentesque at elit sed mattis. Ut non velit orci. Aliquam hendrerit ipsum s</p>
-                    <button className={style.botao} onClick={() => {
-                        navigate('/Mensagens')
-                    }}>enviar proposta particular</button>
-                    <p>categorias</p>
-                    <div className={style.card}>Front-End</div>
-                    <p>habilidade</p>
-                    <div className={style.card}>JavaScript</div>
-                    <p>nível</p>
-                    <div className={style.card}>Experiente</div>
+                    {/* Foto de perfil */}
+                    <ProfilePhoto freelancer={freelancer} />
+                    {/* Nome do freelancer */}
+                    <h1>
+                        {freelancer.nome_freelancer || 'Nome não disponível'}
+                    </h1>
+                    {/* Estrelas de avaliação */}
+                    <img src={estrelas} alt="Avaliação" />
+                    {/* Descrição */}
+                    <p className={style.descricao}>
+                        {freelancer.descricao || 'Descrição não informada'}
+                    </p>
                 </div>
 
-                <div className={style.detalhe}> 
+                {/* Navegação entre as telas */}
+                <div className={style.detalhe}>
                     <ul className={style.navigate}>
-                        <li onClick={(e) => changeScreen(1, e)} className={`${style.selecionado}`}>Início</li>
-                        <li onClick={(e) => changeScreen(2, e)} className={``}>Portfólio</li>
-                        <li onClick={(e) => changeScreen(3, e)} className={``}>Projetos</li>
+                        <li
+                            onClick={(e) => changeScreen(1, e)}
+                            className={`${style.selecionado}`}
+                        >
+                            Início
+                        </li>
+                        <li onClick={(e) => changeScreen(2, e)}>Portfólio</li>
+                        <li onClick={(e) => changeScreen(3, e)}>Projetos</li>
                     </ul>
+                    {/* Renderiza a tela correspondente */}
                     <div>
-                        {currentScreen === 1 ? (
-                            <Inicio style={style} />
-                        ) : currentScreen === 2 ? (
-                            <Portfolio style={style} />
-                        ) : (
-                            <Projetos style={style} />
-                        )}
+                        {currentScreen === 1 && <Inicio style={style} freelancer={freelancer} />}
+                        {currentScreen === 2 && <Portfolio style={style} freelancer={freelancer} />}
+                        {currentScreen === 3 && <Projetos style={style} freelancer={freelancer} />}
                     </div>
                 </div>
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default PerfilFreelancer
+export default FreelancerDetails;

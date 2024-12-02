@@ -36,41 +36,39 @@ const Usuarios = () => {
     const handleFreelancerClick = (freelancer) => {
         // Exibir SweetAlert com detalhes do freelancer
         Swal.fire({
-            title: `<h2 style="font-size: 24px; color: #1a202c; margin-bottom: 10px;">${freelancer.nome_freelancer}</h2>`,
+            title: `<h2 style="font-size: 24px; color: #1a202c; margin-bottom: 10px;">Propostas Recebidas</h2>`,
             html: `
-                <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">
-                    ${freelancer.descricao || 'Descrição não informada'}
-                </p>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
-                    ${freelancer.habilidades && freelancer.habilidades.length > 0
-                        ? freelancer.habilidades
-                              .map(
-                                  (habilidade) => `
-                                  <div style="
-                                      display: flex;
-                                      align-items: center;
-                                      gap: 8px;
-                                      padding: 8px 12px;
-                                      border: 1px solid #e5e7eb;
-                                      border-radius: 8px;
-                                      font-size: 14px;
-                                      color: #374151;
-                                      background-color: #f9fafb;">
-                                      <img src="${habilidade.icon_habilidade}" 
-                                           alt="${habilidade.nome_habilidade}" 
-                                           style="width: 20px; height: 20px; border-radius: 50%;">
-                                      <span>${habilidade.nome_habilidade}</span>
-                                  </div>`
-                              )
-                              .join("")
-                        : '<p style="color: #9ca3af;">Habilidades não informadas</p>'}
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    ${
+                        propostas && propostas.length > 0
+                            ? propostas
+                                  .map(
+                                      (proposta) => `
+                                      <div style="
+                                          border: 1px solid #e5e7eb;
+                                          border-radius: 8px;
+                                          padding: 16px;
+                                          background-color: #f9fafb;
+                                          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+                                          <h3 style="font-size: 18px; color: #1a202c; margin-bottom: 8px;">
+                                              ${proposta.nome_cliente}
+                                          </h3>
+                                          <p style="font-size: 14px; color: #6b7280; margin-bottom: 10px;">
+                                              ${proposta.descricao || 'Descrição não informada'}
+                                          </p>
+                                          <p style="font-size: 14px; color: #374151; margin-bottom: 5px;">
+                                              <strong>Prazo:</strong> ${proposta.prazo || 'Não informado'}
+                                          </p>
+                                          <p style="font-size: 14px; color: #374151; margin-bottom: 5px;">
+                                              <strong>Orçamento:</strong> ${proposta.orcamento || 'Não informado'}
+                                          </p>
+                                      </div>`
+                                  )
+                                  .join("")
+                            : '<p style="color: #9ca3af; font-size: 14px;">Nenhuma proposta recebida.</p>'
+                    }
                 </div>
             `,
-            imageUrl: freelancer.habilidades && freelancer.habilidades.length > 0
-                ? freelancer.habilidades[0].icon_habilidade
-                : null,
-            imageWidth: 60,
-            imageHeight: 60,
             showCloseButton: true,
             confirmButtonText: '<span style="font-size: 14px; padding: 5px 10px;">Fechar</span>',
             customClass: {
@@ -79,7 +77,8 @@ const Usuarios = () => {
             width: '600px',
             padding: '20px',
             background: '#ffffff',
-        });        
+        });
+               
     };
 
     if (loading) {
