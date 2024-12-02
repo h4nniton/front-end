@@ -1,69 +1,83 @@
-import img from '../../img/exemplo portifolio.png'
-import Style from '../../Css/inicioFreelancer.module.css'
-import empresa from '../../img/empresa.png'
-import avaliacao from '../../img/avaliacao.png'
-import { useParams, useNavigate } from 'react-router-dom';
-import Comentarios from '../../Bases/Comentarios.js'
+import img from '../../img/exemplo portifolio.png';
+import Style from '../../Css/IncioEmpresa.module.css'; // Alterado o arquivo de estilo
+import empresa from '../../img/empresa.png';
+import avaliacao from '../../img/avaliacao.png';
+import { useParams } from 'react-router-dom';
+import Comentarios from '../../Bases/Comentarios.js';
 import { useState, useEffect } from 'react';
 
+function InicioEmpresa({ listPortfolio }) {
+    const { id } = useParams();
 
-function InicioFreelancer({ listPortfolio }) {
-  const { id } = useParams();
-  const verificarImagem = (url) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve(true);
-      img.onerror = () => resolve(false);
-      img.src = url;
-    });
-  };
+    // Debug: logando valores recebidos
+    console.log("ID recebido via useParams:", id);
+    console.log("Portfólio recebido:", listPortfolio);
 
-  const ImagemPortfolio = ({ url, defaultImage }) => {
-    const [isValidImage, setIsValidImage] = useState(false);
+    // Função para verificar se uma imagem é válida
+    const verificarImagem = (url) => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = url;
+        });
+    };
 
-    useEffect(() => {
-      const verificar = async () => {
-        const resultado = await verificarImagem(url);
-        setIsValidImage(resultado);
-      };
+    // Componente para carregar uma imagem ou exibir uma imagem padrão se a URL for inválida
+    const ImagemPortfolio = ({ url, defaultImage }) => {
+        const [isValidImage, setIsValidImage] = useState(false);
 
-      verificar();
-    }, [url]);
+        useEffect(() => {
+            const verificar = async () => {
+                const resultado = await verificarImagem(url);
+                setIsValidImage(resultado);
+            };
+
+            verificar();
+        }, [url]);
+
+        return (
+            <img
+                src={isValidImage ? url : defaultImage}
+                alt="Imagem do portfólio"
+                style={{ width: "100%", height: "auto" }} // Ajuste para melhor renderização
+            />
+        );
+    };
+
+    const defaultImage = "/src/componente/img/iconzip.png"; // Imagem padrão caso a URL falhe
+
     return (
-      <img
-        src={isValidImage ? url : defaultImage}
-        alt="Imagem do portfólio"
-      />
-    );
-  };
-
-  const defaultImage = "/src/componente/img/iconzip.png";
-
-  return (
-    <div className={Style.perfil}>
-      <div className={Style.previa}>
-        {listPortfolio && listPortfolio.length > 0 ? (
-          listPortfolio.map((portfolio, index) => (
-            <div key={index} className={Style.portfolio}>
-              <ImagemPortfolio url={portfolio.freelancers && portfolio.freelancers.length > 0
-                ? portfolio.freelancers[0]
-                : "Not found"} defaultImage={defaultImage} />
+        <div className={Style.perfil}>
+            {/* Seção de Portfólio */}
+            <div className={Style.previa}>
+                {listPortfolio && listPortfolio.length > 0 ? (
+                    listPortfolio.map((portfolio, index) => (
+                        <div key={index} className={Style.portfolio}>
+                            {/* Verifica se "arquivo" existe antes de passar */}
+                            {portfolio.arquivo ? (
+                                <ImagemPortfolio
+                                    url={portfolio.arquivo}
+                                    defaultImage={defaultImage}
+                                />
+                            ) : (
+                                <p>Arquivo não encontrado</p>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <p>Portfólio não encontrado</p>
+                )}
             </div>
-          ))
-        ) : (
-          <p>not found</p>
-        )}
-      </div>
 
-      <div className={Style.avaliacoes}>
-        <div className={Style.comentario}>
-          <Comentarios key={id} />
+            {/* Seção de Comentários */}
+            <div className={Style.avaliacoes}>
+                <div className={Style.comentario}>
+                    <Comentarios key={id} />
+                </div>
+            </div>
         </div>
-
-      </div>
-
-    </div>
-  )
+    );
 }
 
-export default InicioFreelancer
+export default InicioEmpresa;

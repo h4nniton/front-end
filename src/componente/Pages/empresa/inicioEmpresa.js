@@ -9,6 +9,10 @@ import { useState, useEffect } from 'react';
 function InicioEmpresa({ listPortfolio }) {
     const { id } = useParams();
 
+    // Debug: logando valores recebidos
+    console.log("ID recebido via useParams:", id);
+    console.log("Portfólio recebido:", listPortfolio);
+
     // Função para verificar se uma imagem é válida
     const verificarImagem = (url) => {
         return new Promise((resolve) => {
@@ -36,6 +40,7 @@ function InicioEmpresa({ listPortfolio }) {
             <img
                 src={isValidImage ? url : defaultImage}
                 alt="Imagem do portfólio"
+                style={{ width: "100%", height: "auto" }} // Ajuste para melhor renderização
             />
         );
     };
@@ -49,7 +54,15 @@ function InicioEmpresa({ listPortfolio }) {
                 {listPortfolio && listPortfolio.length > 0 ? (
                     listPortfolio.map((portfolio, index) => (
                         <div key={index} className={Style.portfolio}>
-                            <ImagemPortfolio url={portfolio.arquivo} defaultImage={defaultImage} />
+                            {/* Verifica se "arquivo" existe antes de passar */}
+                            {portfolio.arquivo ? (
+                                <ImagemPortfolio
+                                    url={portfolio.arquivo}
+                                    defaultImage={defaultImage}
+                                />
+                            ) : (
+                                <p>Arquivo não encontrado</p>
+                            )}
                         </div>
                     ))
                 ) : (

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
+import style from "../../Css/chatTela.module.css"
 
-// Simulando backend com uma lista de mensagens (em um caso real, use uma API externa)
-const backendURL = "http://localhost:3001/messages"; // Altere para sua API
+
+const backendURL = "http://localhost:3001/messages"; // Substitua pelo endpoint correto
 
 const ChatApp = () => {
-  const [messages, setMessages] = useState([]); // Armazena as mensagens
-  const [newMessage, setNewMessage] = useState(""); // Mensagem nova do input
-  const [username, setUsername] = useState(""); // Nome do usuário
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [username, setUsername] = useState("Serena Van Der Woodsen"); // Nome padrão
+  const [selectedContact, setSelectedContact] = useState("Francisco de Almeida"); // Contato inicial
 
-  // Função para buscar mensagens (simula polling)
+  // Função para buscar mensagens
   const fetchMessages = async () => {
     try {
       const response = await fetch(backendURL);
@@ -30,6 +32,7 @@ const ChatApp = () => {
         body: JSON.stringify({
           username,
           text: newMessage,
+          contact: selectedContact,
           timestamp: new Date().toISOString(),
         }),
       });
@@ -40,73 +43,71 @@ const ChatApp = () => {
     }
   };
 
-  // Busca mensagens regularmente (polling)
+  // Polling para buscar mensagens
   useEffect(() => {
-    fetchMessages(); // Busca inicial
-    const interval = setInterval(fetchMessages, 2000); // Atualiza a cada 2 segundos
-    return () => clearInterval(interval); // Limpa o intervalo ao desmontar
+    fetchMessages();
+    const interval = setInterval(fetchMessages, 2000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-      <h1>Chat Simples</h1>
-      <div style={{ marginBottom: "20px" }}>
+    <div className="chat-app">
+      {/* Coluna da lista de contatos */}
+      <div className="contact-list">
         <input
           type="text"
-          placeholder="Digite seu nome"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={{
-            padding: "10px",
-            width: "100%",
-            marginBottom: "10px",
-            boxSizing: "border-box",
-          }}
+          placeholder="pesquisar conversas"
+          className="search-input"
         />
-        <div
-          style={{
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            padding: "10px",
-            height: "300px",
-            overflowY: "scroll",
-          }}
-        >
-          {messages.map((msg, index) => (
-            <div key={index} style={{ marginBottom: "10px" }}>
-              <strong>{msg.username}</strong>: {msg.text}
-              <div style={{ fontSize: "0.8em", color: "#666" }}>
-                {new Date(msg.timestamp).toLocaleTimeString()}
-              </div>
-            </div>
-          ))}
+        <div className="contact-item" onClick={() => setSelectedContact("Serena Van Der Woodsen")}>
+          <img src="/serena.jpg" alt="Serena" className="contact-photo" />
+          <div className="contact-info">
+            <h4>Serena Van Der Woodsen</h4>
+            <span className="status online">online</span>
+          </div>
+        </div>
+        <div className="contact-item" onClick={() => setSelectedContact("Francisco de Almeida")}>
+          <img src="/francisco.jpg" alt="Francisco" className="contact-photo" />
+          <div className="contact-info">
+            <h4>Francisco de Almeida</h4>
+            <span className="status offline">offline</span>
+          </div>
         </div>
       </div>
-      <input
-        type="text"
-        placeholder="Digite sua mensagem"
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-        style={{
-          padding: "10px",
-          width: "80%",
-          marginRight: "10px",
-          boxSizing: "border-box",
-        }}
-      />
-      <button
-        onClick={sendMessage}
-        style={{
-          padding: "10px 20px",
-          backgroundColor: "#007BFF",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        Enviar
-      </button>
+
+      {/* Coluna do chat */}
+      <div className="chat-box">
+        <div className="chat-header">
+          <img
+            src={selectedContact === "Serena Van Der Woodsen" ? "/serena.jpg" : "/francisco.jpg"}
+            alt={selectedContact}
+            className="chat-header-photo"
+          />
+          <h4>{selectedContact}</h4>
+          <span className={`status ${selectedContact === "Serena Van Der Woodsen" ? "online" : "offline"}`}>
+            {selectedContact === "Serena Van Der Woodsen" ? "online" : "offline"}
+          </span>
+        </div>
+        <div className="chat-messages">
+          {messages
+            .filter((msg) => msg.contact === selectedContact)
+            .map((msg, index) => (
+              <div key={index} className={`message ${msg.username === username ? "sent" : "received"}`}>
+                <p>{msg.text}</p>
+                <span>{new Date(msg.timestamp).toLocaleTimeString()}</span>
+              </div>
+            ))}
+        </div>
+        <div className="chat-input">
+          <input
+            type="text"
+            placeholder="message..."
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+          />
+          <button onClick={sendMessage}>Enviar</button>
+        </div>
+      </div>
     </div>
   );
 };

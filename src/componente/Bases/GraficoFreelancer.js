@@ -17,7 +17,7 @@ const BarChartComponent = () => {
     setError(null);
 
     try {
-      const response = await axios.get(`http://localhost:8080/v1/jinni/cliente/${id}`);
+      const response = await axios.get(`http://localhost:8080/v1/jinni/freelancer/${id}`);
       const data = response.data;
 
       // Organiza os dados do gráfico

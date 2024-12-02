@@ -1,4 +1,4 @@
-import Grafico from "../../Bases/Grafico.js"
+import Grafico from "../../Bases/GraficoFreelancer.js"
 import style from "../../Css/grafico.module.css"
 
 function ProjetosHistorico(){

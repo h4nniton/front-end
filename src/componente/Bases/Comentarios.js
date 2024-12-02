@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-
-
+import { useParams } from 'react-router-dom';
 
 const Avaliacoes = () => {
-    const { id } = useParams();
-
-  const [avaliacoes, setAvaliacoes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { id } = useParams();
+  const [avaliacoes, setAvaliacoes] = useState([]); // Estado para armazenar avaliações
+  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [error, setError] = useState(null); // Estado de erro
 
   useEffect(() => {
     // Função para buscar os dados
     const fetchAvaliacoes = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/v1/jinni/freelancer/${id}`); // Substitua pela sua URL de API
+        const response = await fetch(`http://localhost:8080/v1/jinni/cliente/${id}`);
         if (!response.ok) {
           throw new Error('Erro ao buscar dados');
         }
         const data = await response.json();
-        setAvaliacoes(data); // Atualiza o estado com os dados recebidos
+
+        // Verifica se o retorno da API contém o array de avaliações
+        if (data.avaliacao) {
+          setAvaliacoes(data.avaliacao); // Atualiza o estado com as avaliações
+        } else {
+          setAvaliacoes([]); // Define como vazio se não houver avaliações
+        }
       } catch (err) {
         setError(err.message); // Captura erros
       } finally {
@@ -28,8 +31,9 @@ const Avaliacoes = () => {
     };
 
     fetchAvaliacoes(); // Chama a função
-  }, []); // O array vazio garante que o useEffect rode apenas na montagem do componente
+  }, [id]); // Reexecuta o efeito quando o ID mudar
 
+  // Renderização condicional para estados de carregamento e erro
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
 
@@ -39,11 +43,17 @@ const Avaliacoes = () => {
       {avaliacoes.length > 0 ? (
         <ul>
           {avaliacoes.map((avaliacao) => (
-            <li key={avaliacao.id} style={{ border: '1px solid #ddd', margin: '10px', padding: '10px' }}>
-              <h3>{avaliacao[0].nome_avaliador} </h3>
-              <p>Estrelas: {avaliacao[0].estrelas} ⭐</p>
-              
-              <p>Comentário: {avaliacao[0].comentario}</p>
+            <li
+              key={avaliacao.id}
+              style={{
+                border: '1px solid #ddd',
+                margin: '10px',
+                padding: '10px',
+              }}
+            >
+              <h3>{avaliacao.nome_avaliador}</h3> {/* Nome do avaliador */}
+              <p>Estrelas: {avaliacao.estrelas} ⭐</p> {/* Número de estrelas */}
+              <p>Comentário: {avaliacao.comentario}</p> {/* Comentário */}
             </li>
           ))}
         </ul>

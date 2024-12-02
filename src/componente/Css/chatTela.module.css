@@ -1,75 +1,123 @@
-*{
-    margin: 0;
-}
-.chatTela{
+.chat-app {
+    display: flex;
     height: 100vh;
-    width: 100vw;
-    display: flex;
-    color: aqua;
-}
-
-.colunaConversas{
-    height: 100%;
-    width: 26.18%;
-    padding-top: 26px;
-    background-color: #FBFBFB;
-}
-.rowInput{
+    font-family: Arial, sans-serif;
+  }
+  
+  .contact-list {
+    width: 25%;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .search-input {
     width: 100%;
-    padding-bottom: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .contact-item {
     display: flex;
-    justify-content: center;
-}
-.input{
-    height: 30px;
-    width: 80%;
-}
-.chatColumn{
-    height: 75vh;
-    width: 100%;
-    overflow: auto;
-}
-/* CARD DO CONTATO */
-.contactCard{
-    height: 80px;
-    width: 100%;
-    display: flex;
-    background: #8cc3f7;
-    gap: 20px;
-}
-.contactCard :hover{
-    background: #94c7f7;
-}
-/* FOTO DO CONTATO */
-.photoBox{
-    height: 100%;
-    padding-left: 15px;
-    display: grid;
     align-items: center;
-}
-.img{
-    height: 60px;
-    width: 60px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .contact-photo {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-}
-/* NOME E MENSAGEM */
-.contactInfo{
-    height: 100%;
-    width: 40%;
+    margin-right: 10px;
+  }
+  
+  .contact-info {
+    flex: 1;
+  }
+  
+  .status {
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 10px;
+  }
+  
+  .status.online {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .status.offline {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .chat-box {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 16px 0 16px 0;
-}
-.contactName{
-    font-size: 16px;
-    background-image: linear-gradient(90deg, rgba(8, 16, 97, 1) 35%, rgba(6, 111, 210, 1) 100%);
-    -webkit-background-clip: text;
-    color: transparent;
-    background-clip: text;
-    font-weight: 600;
-}
-    
-.lastMessage{
-    font-size: 12px;
-    color: #484848;
-}
+    background-color: #fff;
+  }
+  
+  .chat-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .chat-header-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .message {
+    margin-bottom: 20px;
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .message.sent {
+    background-color: #007bff;
+    color: white;
+    margin-left: auto;
+  }
+  
+  .message.received {
+    background-color: #f1f1f1;
+    color: #000;
+  }
+  
+  .chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .chat-input button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
