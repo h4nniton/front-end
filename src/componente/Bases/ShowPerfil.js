@@ -76,7 +76,9 @@ const FreelancerDetails = () => {
         event.currentTarget.classList.add(style.selecionado);
         setCurrentScreen(screen);
     };
-    const averageRating = Math.round(calculateAverageRating(freelancer.avaliacao));
+    const averageRating = Math.round(calculateAverageRating(freelancer.freelancers && freelancer.freelancers.length > 0
+        ? freelancer.freelancers[0].avaliacao
+        : "Not found"));
 
     return (
         <div className={style.telas}>
@@ -88,7 +90,7 @@ const FreelancerDetails = () => {
                     <h1>{freelancer.freelancers && freelancer.freelancers.length > 0
                         ? freelancer.freelancers[0].nome_freelancer
                         : "Not found"}</h1>
-                    <StarRating rating={averageRating} />
+                            <StarRating rating={averageRating} />
 
                     <p className={style.descricao}>{freelancer.freelancers && freelancer.freelancers.length > 0
                         ? freelancer.freelancers[0].descricao
@@ -136,7 +138,7 @@ const FreelancerDetails = () => {
                         <li onClick={(e) => changeScreen(3, e)}>Projetos</li>
                     </ul>
                     <div>
-                        {currentScreen === 1 && <Inicio style={style} key={freelancer.id} />}
+                        {currentScreen === 1 && <Inicio style={style} freelancer={freelancer.freelancers[0]}/>}
                         {currentScreen === 2 && <Portfolio style={style} key={freelancer.id} />}
                         {currentScreen === 3 && <Projetos style={style} key={freelancer.id} />}
                     </div>

@@ -12,6 +12,12 @@
     background-color: #03396C;
     width: 15vw;
     border-radius: 20px;
+    height: 15vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
 
 .portfolio p{
@@ -29,7 +35,7 @@
     flex-direction: column;
     gap: 20px;
     overflow: auto;
-    height: 30vh;
+    height: 43vh;
 }
 
 
@@ -39,11 +45,13 @@
     border: black solid 1px;
     border-radius: 20px;
     padding: 10px;
+    background-color: #03396C;
 }
 
 .avaliacao p{
     text-align: left;
     padding: 10px;
+    
 }
 
 .detalhes{

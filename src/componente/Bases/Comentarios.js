@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import styles from '../Css/Comentarios.module.css'
+import star from '../img/estrelaCheiaAzul.png'
 
 const Avaliacoes = () => {
   const { id } = useParams();
@@ -11,15 +13,15 @@ const Avaliacoes = () => {
     // Função para buscar os dados
     const fetchAvaliacoes = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/v1/jinni/cliente/${id}`);
+        const response = await fetch(`http://localhost:8080/v1/jinni/freelancer/${id}`);
         if (!response.ok) {
           throw new Error('Erro ao buscar dados');
         }
         const data = await response.json();
 
-        // Verifica se o retorno da API contém o array de avaliações
-        if (data.avaliacao) {
-          setAvaliacoes(data.avaliacao); // Atualiza o estado com as avaliações
+        // Verifica se o retorno da API contém freelancers com avaliações
+        if (data.freelancers && data.freelancers.length > 0 && data.freelancers[0].avaliacao) {
+          setAvaliacoes(data.freelancers[0].avaliacao); // Atualiza o estado com as avaliações
         } else {
           setAvaliacoes([]); // Define como vazio se não houver avaliações
         }
@@ -38,25 +40,28 @@ const Avaliacoes = () => {
   if (error) return <p>Erro: {error}</p>;
 
   return (
+
     <div>
-      <h2>Avaliações</h2>
       {avaliacoes.length > 0 ? (
-        <ul>
+        <div className={styles.comentarios}>
           {avaliacoes.map((avaliacao) => (
-            <li
+            <div
               key={avaliacao.id}
-              style={{
-                border: '1px solid #ddd',
-                margin: '10px',
-                padding: '10px',
-              }}
+              className={styles.card}
             >
-              <h3>{avaliacao.nome_avaliador}</h3> {/* Nome do avaliador */}
-              <p>Estrelas: {avaliacao.estrelas} ⭐</p> {/* Número de estrelas */}
-              <p>Comentário: {avaliacao.comentario}</p> {/* Comentário */}
-            </li>
+              <div className={styles.info}>
+                <h3 > {avaliacao.nome_avaliador}</h3> {/* Nome do avaliador */}
+                <p>
+                  {Array.from({ length: avaliacao.estrelas }).map((_, index) => (
+                    <img key={index} src={star} className={styles.estrela} />
+                  ))}
+                </p>
+              </div>
+
+              <p>{avaliacao.comentario}</p> {/* Comentário */}
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Sem avaliações disponíveis.</p>
       )}

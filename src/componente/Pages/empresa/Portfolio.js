@@ -1,77 +1,100 @@
-import React, { useState, useEffect } from "react";
-import Style from "../../Css/portifolio.module.css";
-import defaultImage from '../../img/reactIcon.png'; // Imagem padrão caso o arquivo não seja encontrado ou não seja válido
+import img from '../../img/Logo.png';
+import Style from '../../Css/inicioFreelancer.module.css';
+import empresa from '../../img/empresa.png';
+import avaliacao from '../../img/avaliacao.png';
+import { useParams } from 'react-router-dom'; // Importando para pegar o ID da URL
+import Comentarios from '../../Bases/Comentarios.js';
+import { useState, useEffect } from 'react';
 
-// Função para verificar se a URL da imagem é válida
 const verificarImagem = (url) => {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-    img.src = url;
-  });
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+    });
 };
 
-// Componente que exibe a imagem ou link do portfólio
 const ImagemPortfolio = ({ arquivo, defaultImage }) => {
-  const [isValidImage, setIsValidImage] = useState(false);
-  const [isZipFile, setIsZipFile] = useState(false);
+    const [isValidImage, setIsValidImage] = useState(false);
+    const [isZipFile, setIsZipFile] = useState(false);
 
-  useEffect(() => {
-    // Verifica se o arquivo é uma imagem ou um arquivo zip
-    const verificar = async () => {
-      // Verifica se é uma imagem válida
-      const resultadoImagem = await verificarImagem(arquivo);
-      setIsValidImage(resultadoImagem);
+    useEffect(() => {
+        const verificar = async () => {
+            const resultadoImagem = await verificarImagem(arquivo);
+            setIsValidImage(resultadoImagem);
 
-      // Verifica se o arquivo é um zip
-      setIsZipFile(arquivo.endsWith(".zip"));
-    };
+            setIsZipFile(arquivo.endsWith(".zip"));
+        };
 
-    if (arquivo) {
-      verificar();
-    }
-  }, [arquivo]);
+        if (arquivo) {
+            verificar();
+        }
+    }, [arquivo]);
 
-  return (
-    <div className={Style.portfolioItem}>
-      {isZipFile ? (
-        // Exibe link para download se for um arquivo zip
-        <a href={arquivo} target="_blank" rel="noopener noreferrer">
-          Download do Portfólio (.zip)
-        </a>
-      ) : (
-        <img
-          src={isValidImage ? arquivo : defaultImage} // Exibe a imagem ou a padrão
-          alt={isValidImage ? "Imagem do portfólio" : "Imagem padrão"}
-          style={{ width: "100%", height: "auto", objectFit: "cover" }} // Garantindo boa responsividade
-        />
-      )}
-    </div>
-  );
+    return (
+        <div className={Style.portfolioItem}>
+            {isZipFile ? (
+                <a href={arquivo} target="_blank" rel="noopener noreferrer">
+                    Download do Portfólio (.zip)
+                </a>
+            ) : (
+                <img
+                    src={isValidImage ? arquivo : defaultImage}
+                    alt={isValidImage ? "Imagem do portfólio" : "Imagem padrão"}
+                    style={{ width: "100%", height: "auto", objectFit: "cover" }}
+                />
+            )}
+        </div>
+    );
 };
 
-function Portfolio({ freelancer }) {
-  // Verifique se freelancer existe e se tem portfolio
-  const portfolio = freelancer?.portfolio || []; // Usando operador de encadeamento opcional (?.) e valor padrão []
+const Portfolio = () => {
+    const { id } = useParams(); // Pegando o ID da URL
+    const [freelancer, setFreelancer] = useState(null);
+    const defaultImage = "../../img/iconzip.png"; // Corrigido o caminho da imagem
 
-  return (
-    <div className={Style.tela}>
-      <div className={Style.historico}>
-        <div className={Style.previa}>
-          {portfolio.length > 0 ? (
-            portfolio.map((portfolioItem, index) => (
-              <div key={index} className={Style.portfolio}>
-                <ImagemPortfolio arquivo={portfolioItem.arquivo} defaultImage={defaultImage} />
-              </div>
-            ))
-          ) : (
-            <p>Portfólio não encontrado</p>
-          )}
+    
+    useEffect(() => {
+        const fetchFreelancerData = async () => {
+          const url = `http://localhost:8080/v1/jinni/freelancer/${id}`
+            const response = await fetch(url);
+            console.log(url);
+            
+            const data = await response.json();
+            console.log("Dados do Freelancer:", data);
+
+            if (data && data.freelancers && data.freelancers.length > 0) {
+                setFreelancer(data.freelancers[0]); // Atualiza o estado com freelancer
+            }
+        };
+
+        fetchFreelancerData();
+    }, [id]); // Use o ID da URL como dependência
+
+    if (!freelancer) {
+        return <p>Carregando informações do freelancer...</p>;
+    }
+
+    return (
+        <div className={Style.perfil}>
+            {/* Seção de Portfólio */}
+            <div className={Style.previa}>
+                {freelancer.portfolio && freelancer.portfolio.length > 0 ? (
+                    freelancer.portfolio.map((portfolio, index) => (
+                        <div key={index} className={Style.portfolio}>
+                            <ImagemPortfolio
+                                arquivo={portfolio.arquivo}
+                                defaultImage={defaultImage}
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <p>Portfólio não encontrado</p>
+                )}
+            </div>
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
 
 export default Portfolio;
