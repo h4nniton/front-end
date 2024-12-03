@@ -1,4 +1,4 @@
-import img from '../../img/exemplo portifolio.png';
+import img from '../../img/Logo.png';
 import Style from '../../Css/IncioEmpresa.module.css'; // Alterado o arquivo de estilo
 import empresa from '../../img/empresa.png';
 import avaliacao from '../../img/avaliacao.png';
@@ -6,14 +6,10 @@ import { useParams } from 'react-router-dom';
 import Comentarios from '../../Bases/Comentarios.js';
 import { useState, useEffect } from 'react';
 
-function InicioEmpresa({ listPortfolio }) {
+function InicioFreelancer({ freelancer }) {
     const { id } = useParams();
 
-    // Debug: logando valores recebidos
-    console.log("ID recebido via useParams:", id);
-    console.log("Portfólio recebido:", listPortfolio);
-
-    // Função para verificar se uma imagem é válida
+    // Função para verificar se a URL da imagem é válida
     const verificarImagem = (url) => {
         return new Promise((resolve) => {
             const img = new Image();
@@ -23,41 +19,65 @@ function InicioEmpresa({ listPortfolio }) {
         });
     };
 
-    // Componente para carregar uma imagem ou exibir uma imagem padrão se a URL for inválida
-    const ImagemPortfolio = ({ url, defaultImage }) => {
+    // Componente para carregar a imagem ou link de download
+    const ImagemPortfolio = ({ arquivo, defaultImage }) => {
         const [isValidImage, setIsValidImage] = useState(false);
+        const [isZipFile, setIsZipFile] = useState(false);
 
         useEffect(() => {
+            // Verifica se o arquivo é uma imagem ou um arquivo zip
             const verificar = async () => {
-                const resultado = await verificarImagem(url);
-                setIsValidImage(resultado);
+                // Verifica se é uma imagem válida
+                const resultadoImagem = await verificarImagem(arquivo);
+                setIsValidImage(resultadoImagem);
+
+                // Verifica se o arquivo é um zip
+                setIsZipFile(arquivo.endsWith(".zip"));
             };
 
-            verificar();
-        }, [url]);
+            if (arquivo) {
+                verificar();
+            }
+        }, [arquivo]);
 
         return (
-            <img
-                src={isValidImage ? url : defaultImage}
-                alt="Imagem do portfólio"
-                style={{ width: "100%", height: "auto" }} // Ajuste para melhor renderização
-            />
+            <div className={Style.portfolioItem}>
+                {isZipFile ? (
+                    // Exibe um link para download se for um arquivo zip
+                    <a href={arquivo} target="_blank" rel="noopener noreferrer">
+                        Download do Portfólio (.zip)
+                    </a>
+                ) : (
+                    <img
+                        src={isValidImage ? arquivo : defaultImage} // Exibe a imagem ou a imagem padrão
+                        alt={isValidImage ? "Imagem do portfólio" : "Imagem padrão"}
+                        style={{ width: "100%", height: "auto", objectFit: "cover" }} // Garantindo boa responsividade
+                    />
+                )}
+            </div>
         );
     };
 
     const defaultImage = "/src/componente/img/iconzip.png"; // Imagem padrão caso a URL falhe
 
+    // Debug: Verificando se o freelancer está carregado
+    console.log("Freelancer carregado:", freelancer);
+
+    if (!freelancer) {
+        return <p>Carregando informações do freelancer...</p>; // Exibe uma mensagem enquanto os dados não carregam
+    }
+
     return (
         <div className={Style.perfil}>
             {/* Seção de Portfólio */}
             <div className={Style.previa}>
-                {listPortfolio && listPortfolio.length > 0 ? (
-                    listPortfolio.map((portfolio, index) => (
+                {freelancer.portfolio && freelancer.portfolio.length > 0 ? (
+                    freelancer.portfolio.map((portfolio, index) => (
                         <div key={index} className={Style.portfolio}>
                             {/* Verifica se "arquivo" existe antes de passar */}
                             {portfolio.arquivo ? (
                                 <ImagemPortfolio
-                                    url={portfolio.arquivo}
+                                    arquivo={portfolio.arquivo}
                                     defaultImage={defaultImage}
                                 />
                             ) : (
@@ -80,4 +100,4 @@ function InicioEmpresa({ listPortfolio }) {
     );
 }
 
-export default InicioEmpresa;
+export default InicioFreelancer;

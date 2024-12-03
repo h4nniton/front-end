@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import style from '../Css/perfilFreelancer.module.css';
-import HeaderOficial from '../Bases/HeaderOficial';
+import HeaderOficial from '../Bases/HeaderOficial2';
 import NavBar2 from '../Bases/NavBar2';
 import ProfilePhoto from '../Bases/profileFoto';
 import Inicio from '../Pages/empresa/InicioFreelancer';
@@ -12,11 +12,15 @@ import FullStar from '../img/estrelaCheiaAzul.png';
 
 const StarRating = ({ rating }) => {
     const maxStars = 5;
+
+    // Garantir que rating esteja dentro do intervalo de 0 a 5
+    const validRating = Math.min(Math.max(parseInt(rating, 10), 0), maxStars);
+
     return (
         <div className={style.stars}>
             {Array.from({ length: maxStars }).map((_, index) => (
                 <span key={index}>
-                    {index < rating ? (
+                    {index < validRating ? (
                         <img className={style.star} src={FullStar} alt="Star Full" />
                     ) : (
                         <img className={style.star} src={EmptyStar} alt="Star Empty" />
@@ -28,13 +32,16 @@ const StarRating = ({ rating }) => {
 };
 
 const calculateAverageRating = (avaliacao) => {
-    if (!avaliacao || avaliacao.length === 0) return 0;
-    const totalStars = avaliacao.reduce((sum, a) => sum + a.estrelas, 0);
-    return totalStars / avaliacao.length;
+    if (!avaliacao || avaliacao.length === 0) return 0; // Retorna 0 caso não haja avaliações
+    const totalStars = avaliacao.reduce((sum, a) => sum + a.estrelas, 0); // Soma das estrelas
+    const averageRating = totalStars / avaliacao.length; // Média das estrelas
+    return Math.round(averageRating); // Arredonda para o número inteiro mais próximo
 };
 
 const FreelancerDetails = () => {
     const { id } = useParams();
+    console.log(id);
+    
     const [freelancer, setFreelancer] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Style from "../../Css/portifolio.module.css";
-import defaultImage from "../../img/iconzip.png"; // Importando a imagem padrão
+import defaultImage from '../../img/reactIcon.png'; // Importando a imagem padrão
 
 const verificarImagem = (url) => {
   return new Promise((resolve) => {

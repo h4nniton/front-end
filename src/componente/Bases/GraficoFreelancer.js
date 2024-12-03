@@ -20,19 +20,22 @@ const BarChartComponent = () => {
       const response = await axios.get(`http://localhost:8080/v1/jinni/freelancer/${id}`);
       const data = response.data;
 
-      // Organiza os dados do gráfico
+      // Organiza os dados do gráfico com os valores de quantidade de projetos
       setChartData({
         series: [
           {
             name: 'Quantidade',
             data: [
-              data.quantidade_finalizados || 0, // Projetos finalizados
-              data.quantidade_andamento || 0,  // Projetos em andamento
-              data.quantidade_projetos || 0,   // Projetos em negociação
+              data.freelancers && data.freelancers.length > 0
+                ? data.freelancers[0].quantidade_projetos :  0, // Projetos totais
+              data.freelancers && data.freelancers.length > 0
+                ? data.freelancers[0].quantidade_andamento :  0,  // Projetos em andamento
+              data.freelancers && data.freelancers.length > 0
+                ? data.freelancers[0].quantidade_finalizados :  0,  // Projetos finalizados
             ],
           },
         ],
-        categories: ['Finalizados', 'Em Andamento', 'Em Negociação'], // Labels das barras
+        categories: ['Projetos totais', 'Em Andamento', 'Finalizados'], // Labels das barras
       });
     } catch (err) {
       console.error('Erro ao buscar os dados do gráfico:', err);
@@ -47,7 +50,6 @@ const BarChartComponent = () => {
   }, [id]);
 
   const options = {
-    colors: ['#065EB1'], // Cor única para as barras
     chart: {
       type: 'bar',
       height: 350,
@@ -55,7 +57,7 @@ const BarChartComponent = () => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '65%',
+        columnWidth: '30%',
         endingShape: 'rounded',
       },
     },
@@ -71,7 +73,15 @@ const BarChartComponent = () => {
       },
     },
     fill: {
-      opacity: 1,
+      type: 'gradient', // Define o tipo de preenchimento para gradiente
+      gradient: {
+        type: 'linear', // Define o tipo como linear
+        shadeIntensity: 10, // Intensidade da cor de sombra
+        gradientToColors: ['#011F4B'], // Cor para o final do gradiente
+        inverseColors: false, // Inverte a direção do gradiente
+        opacityFrom: 10, // Opacidade inicial
+        stops: [0, 100], // Onde começa e termina o gradiente
+      },
     },
     tooltip: {
       y: {
