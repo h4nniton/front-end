@@ -51,7 +51,7 @@ const PerfilCriacao = () => {
             );
             console.log('Resposta do servidor:', responses);
             alert('Categorias enviadas com sucesso!');
-            navigate('/habilidades'); // Navega para a próxima tela
+            navigate('/PerfilHabilidade'); // Navega para a próxima tela
         } catch (error) {
             console.error('Erro ao enviar categorias:', error);
             alert('Ocorreu um erro ao enviar as categorias.');
@@ -81,7 +81,7 @@ const PerfilCriacao = () => {
                 <img
                     src={categoria.icon_categoria || '/default-icon.png'} // Ícone da categoria ou ícone padrão
                     alt={categoria.nome_categoria}
-                    className={styles.img}
+                    className={styles.icon}
                 />
                 <p>{categoria.nome_categoria}</p>
             </div>

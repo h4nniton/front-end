@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react';
 import styles from '../Css/PerfilCriacao.module.css';
 import img from '../img/Logo.png';
 import { useNavigate } from 'react-router-dom';
-import { getHabilidades } from '../integração/funcao.js'; // Função para buscar habilidades
 
 const PerfilHabilidade = () => {
     const navigate = useNavigate();
-    const [habilidades, setHabilidades] = useState([]); // Lista de habilidades
+    const [habilidades, setHabilidades] = useState([]); // Lista de habilidades do GET
     const [selectedIds, setSelectedIds] = useState([]); // IDs das habilidades selecionadas
-    const idFreelancer = 1; // Substitua pelo ID do freelancer real
+    const idFreelancer = 2; // Substitua pelo ID real do freelancer
 
     // Fetch habilidades ao carregar a página
     useEffect(() => {
         const fetchHabilidades = async () => {
-            const data = await getHabilidades();
-            setHabilidades(data.habilidades || []); // Garante que habilidades seja um array
+            try {
+                const response = await fetch('http://localhost:8080/v1/jinni/habilidades'); // GET habilidades
+                const data = await response.json();
+                setHabilidades(data.habilidades || []); // Garante que habilidades seja um array
+            } catch (error) {
+                console.error('Erro ao buscar habilidades:', error);
+                alert('Não foi possível carregar as habilidades. Tente novamente mais tarde.');
+            }
         };
         fetchHabilidades();
     }, []);
@@ -46,7 +51,7 @@ const PerfilHabilidade = () => {
             );
             console.log('Resposta do servidor:', responses);
             alert('Habilidades enviadas com sucesso!');
-            navigate('/PerfilHabilidade'); // Navega para a próxima tela
+            navigate('/proximaPagina'); // Redireciona para a próxima página
         } catch (error) {
             console.error('Erro ao enviar habilidades:', error);
             alert('Ocorreu um erro ao enviar as habilidades.');
@@ -70,7 +75,7 @@ const PerfilHabilidade = () => {
             </div>
 
             <h1>Selecione suas habilidades</h1>
-            <p className={styles.p}>Selecione as habilidades das quais você trabalha</p>
+            <p className={styles.p}>Selecione as habilidades nas quais você trabalha</p>
 
             {/* Exibição dos cards de habilidades */}
             <div id="habilidades" className={styles.section}>
@@ -81,7 +86,7 @@ const PerfilHabilidade = () => {
                         onClick={() => handleCardClick(habilidade.id)}
                     >
                         <img
-                            src={habilidade.icon_habilidade}
+                            src={habilidade.icon_habilidade || '/default-icon.png'} // Ícone da habilidade ou ícone padrão
                             alt={habilidade.nome_habilidade}
                             className={styles.img}
                         />
