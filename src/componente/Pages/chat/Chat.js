@@ -97,7 +97,7 @@ const ChatApp = () => {
                 : style.offline
             }`}
           >
-            {selectedContact === "Serena Van Der Woodsen" ? "Online" : "Offline"}
+            {selectedContact === "Serena Van Der Woodsen" ? style.Online : style.Offline}
           </span>
         </div>
         <div className={style.chatMessages}>
