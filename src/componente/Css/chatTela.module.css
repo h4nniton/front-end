@@ -1,123 +1,191 @@
+/* chatTela.module.css */
+
 .chat-app {
-    display: flex;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-  }
-  
-  .contact-list {
-    width: 25%;
-    background-color: #f8f8f8;
-    padding: 10px;
-    border-right: 1px solid #ddd;
-  }
-  
-  .search-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    cursor: pointer;
-  }
-  
-  .contact-photo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .contact-info {
-    flex: 1;
-  }
-  
-  .status {
-    font-size: 12px;
-    padding: 2px 5px;
-    border-radius: 10px;
-  }
-  
-  .status.online {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .status.offline {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .chat-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-  }
-  
-  .chat-header {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .chat-header-photo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .chat-messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
-  .message {
-    margin-bottom: 20px;
-    max-width: 70%;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .message.sent {
-    background-color: #007bff;
-    color: white;
-    margin-left: auto;
-  }
-  
-  .message.received {
-    background-color: #f1f1f1;
-    color: #000;
-  }
-  
-  .chat-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-  }
-  
-  .chat-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-  
-  .chat-input button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Lista de contatos */
+.contact-list {
+  width: 25%;
+  background: #ffffff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.contact-item:hover {
+  background-color: #f0f0f0;
+}
+
+.contact-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-info h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.contact-info .status {
+  font-size: 12px;
+  color: gray;
+}
+
+.status-online {
+  color: #28a745;
+}
+
+.status-offline {
+  color: #dc3545;
+}
+
+/* Chat box */
+.chat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-header-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-header h4 {
+  flex: 1;
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.chat-header .status {
+  font-size: 14px;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Estilo para mensagens */
+.message {
+  max-width: 60%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 14px;
+  position: relative;
+}
+
+.message.sent {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #0048aa, #007bff);
+  color: #ffffff;
+}
+
+.message.received {
+  align-self: flex-start;
+  background: #e9ecef;
+  color: #333;
+}
+
+.message span {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  text-align: right;
+  color: #bbb;
+}
+
+/* Entrada de texto */
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #0048aa;
+  color: #ffffff;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-input button:hover {
+  background-color: #003377;
+}
+
+/* Botão de fechar negócio */
+.chat-input .close-deal-btn {
+  margin-right: 10px;
+  padding: 10px 15px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-input .close-deal-btn:hover {
+  background-color: #b52d3b;
+}

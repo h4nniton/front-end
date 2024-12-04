@@ -51,54 +51,54 @@ const ChatApp = () => {
   }, []);
 
   return (
-    <div className="chat-app">
+    <div className={style.chat-app}>
       {/* Coluna da lista de contatos */}
-      <div className="contact-list">
+      <div className={style.contact-list}>
         <input
           type="text"
           placeholder="pesquisar conversas"
-          className="search-input"
+          className={style.search-input}
         />
-        <div className="contact-item" onClick={() => setSelectedContact("Serena Van Der Woodsen")}>
-          <img src="/serena.jpg" alt="Serena" className="contact-photo" />
-          <div className="contact-info">
+        <div className={style.contact-item} onClick={() => setSelectedContact("Serena Van Der Woodsen")}>
+          <img src="/serena.jpg" alt="Serena" className={style.contact-photo} />
+          <div className={style.contact-info}>
             <h4>Serena Van Der Woodsen</h4>
-            <span className="status online">online</span>
+            <span className={style.status-online}>online</span>
           </div>
         </div>
-        <div className="contact-item" onClick={() => setSelectedContact("Francisco de Almeida")}>
-          <img src="/francisco.jpg" alt="Francisco" className="contact-photo" />
-          <div className="contact-info">
+        <div className={style.contact-item} onClick={() => setSelectedContact("Francisco de Almeida")}>
+          <img src="/francisco.jpg" alt="Francisco" className={style.contact-photo} />
+          <div className={style.contact-info}>
             <h4>Francisco de Almeida</h4>
-            <span className="status offline">offline</span>
+            <span className={style.status-offline}>offline</span>
           </div>
         </div>
       </div>
 
       {/* Coluna do chat */}
-      <div className="chat-box">
-        <div className="chat-header">
+      <div className={style.chat-box}>
+        <div className={style.chat-header}>
           <img
             src={selectedContact === "Serena Van Der Woodsen" ? "/serena.jpg" : "/francisco.jpg"}
             alt={selectedContact}
-            className="chat-header-photo"
+            className={style.chat-header-photo}
           />
           <h4>{selectedContact}</h4>
-          <span className={`status ${selectedContact === "Serena Van Der Woodsen" ? "online" : "offline"}`}>
-            {selectedContact === "Serena Van Der Woodsen" ? "online" : "offline"}
+          <span className={`${style.status} ${selectedContact === "Serena Van Der Woodsen" ? style.online : style.offline}`}>
+            {selectedContact === "Serena Van Der Woodsen" ? style.online : style.offline}
           </span>
         </div>
-        <div className="chat-messages">
+        <div className={style.chat-messages}>
           {messages
             .filter((msg) => msg.contact === selectedContact)
             .map((msg, index) => (
-              <div key={index} className={`message ${msg.username === username ? "sent" : "received"}`}>
+              <div key={index} className={`${style.message} ${msg.username === username ? style.sent : style.received}`}>
                 <p>{msg.text}</p>
                 <span>{new Date(msg.timestamp).toLocaleTimeString()}</span>
               </div>
             ))}
         </div>
-        <div className="chat-input">
+        <div className={style.chat-input}>
           <input
             type="text"
             placeholder="message..."
