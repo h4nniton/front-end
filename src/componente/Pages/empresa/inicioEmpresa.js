@@ -1,73 +1,88 @@
-import { useState, useEffect } from "react";
-import Style from "../../Css/IncioEmpresa.module.css"; // Alterado o arquivo de estilo
-import Comentarios from "../../Bases/Comentarios.js";
+import img from '../../img/Logo.png';
+import Style from '../../Css/inicioFreelancer.module.css';
+import empresa from '../../img/empresa.png';
+import avaliacao from '../../img/avaliacao.png';
+import { useParams } from 'react-router-dom';
+import Comentarios from '../../Bases/Comentarios2.js';
+import { useState, useEffect } from 'react';
 
-function InicioEmpresa({ listPortfolio }) {
-  // Verificar se o listPortfolio está correto
-  console.log("Portfólio recebido:", listPortfolio);
-
-  // Função para verificar se uma imagem é válida
-  const verificarImagem = (url) => {
+const verificarImagem = (url) => {
     return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve(true);
-      img.onerror = () => resolve(false);
-      img.src = url;
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
     });
-  };
+};
 
-  // Componente para carregar uma imagem ou exibir uma imagem padrão se a URL falhar
-  const ImagemPortfolio = ({ url, defaultImage }) => {
+const ImagemPortfolio = ({ arquivo, defaultImage }) => {
     const [isValidImage, setIsValidImage] = useState(false);
+    const [isZipFile, setIsZipFile] = useState(false);
 
     useEffect(() => {
-      const verificar = async () => {
-        const resultado = await verificarImagem(url);
-        setIsValidImage(resultado);
-      };
+        const verificar = async () => {
+            const resultadoImagem = await verificarImagem(arquivo);
+            setIsValidImage(resultadoImagem);
 
-      verificar();
-    }, [url]);
+            setIsZipFile(arquivo.endsWith(".zip"));
+        };
+
+        if (arquivo) {
+            verificar();
+        }
+    }, [arquivo]);
 
     return (
-      <img
-        src={isValidImage ? url : defaultImage}
-        alt="Imagem do portfólio"
-        style={{ width: "100%", height: "auto" }} // Ajuste para melhor renderização
-      />
-    );
-  };
-
-  const defaultImage = "/src/componente/img/iconzip.png"; // Imagem padrão caso a URL falhe
-
-  return (
-    <div className={Style.perfil}>
-      {/* Seção de Portfólio */}
-      <div className={Style.previa}>
-        {listPortfolio && listPortfolio.length > 0 ? (
-          listPortfolio.map((portfolio, index) => (
-            <div key={index} className={Style.portfolio}>
-              {/* Verifica se "arquivo" existe antes de passar */}
-              {portfolio.arquivo ? (
-                <ImagemPortfolio url={portfolio.arquivo} defaultImage={defaultImage} />
-              ) : (
-                <p>Arquivo não encontrado</p>
-              )}
-            </div>
-          ))
-        ) : (
-          <p>Portfólio não encontrado</p>
-        )}
-      </div>
-
-      {/* Seção de Comentários */}
-      <div className={Style.avaliacoes}>
-        <div className={Style.comentario}>
-          <Comentarios />
+        <div className={Style.portfolioItem}>
+            {isZipFile ? (
+                <a href={arquivo} target="_blank" rel="noopener noreferrer">
+                    Download do Portfólio (.zip)
+                </a>
+            ) : (
+                <img
+                    src={isValidImage ? arquivo : defaultImage}
+                    alt={isValidImage ? "Imagem do portfólio" : "Imagem padrão"}
+                    style={{ width: "100%", height: "auto", objectFit: "cover" }}
+                />
+            )}
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
+
+const InicioEmpresa = ({ empresa }) => {
+    const defaultImage = "/src/componente/img/iconzip.png";
+
+    if (!empresa || !empresa.portfolio) {
+        return <p>Carregando informações do Usuario...</p>;
+    }
+
+    return (
+        <div className={Style.perfil}>
+            {/* Seção de Portfólio */}
+            <div className={Style.previa}>
+                {empresa.portfolio.length > 0 ? (
+                    empresa.portfolio.map((portfolio, index) => (
+                        <div key={index} className={Style.portfolio}>
+                            <ImagemPortfolio
+                                arquivo={portfolio.arquivo}
+                                defaultImage={defaultImage}
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <p>Portfólio não encontrado</p>
+                )}
+            </div>
+
+            {/* Seção de Comentários */}
+            <div className={Style.avaliacoes}>
+                <h2> Avaliações</h2>
+                <div className={Style.comentario}>
+                    <Comentarios  key={empresa.id} />
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default InicioEmpresa;
