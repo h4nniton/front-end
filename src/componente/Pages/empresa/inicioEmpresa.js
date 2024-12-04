@@ -63,8 +63,8 @@ const InicioEmpresa = ({ empresa }) => {
         <div className={Style.perfil}>
             {/* Seção de Portfólio */}
             <div className={Style.previa}>
-                {empresa.portfolio.length > 0 ? (
-                    empresa.portfolio.map((portfolio, index) => (
+                {empresa.cliente[0].portfolio.length > 0 ? (
+                    empresa.cliente[0].portfolio.map((portfolio, index) => (
                         <div key={index} className={Style.portfolio}>
                             <ImagemPortfolio
                                 arquivo={portfolio.arquivo}

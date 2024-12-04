@@ -116,6 +116,7 @@ const ChatApp = () => {
             ))}
         </div>
         <div className={style.chatInput}>
+        <button>fechar negocío</button>
           <input
             type="text"
             placeholder="Digite uma mensagem..."
