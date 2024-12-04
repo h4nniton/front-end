@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom'; // Importando para pegar o ID da URL
 import Comentarios from '../../Bases/Comentarios.js';
 import { useState, useEffect } from 'react';
-import NovoProjeto from '../../Bases/novoProjeto.js'; // Importa a função ou componente do NovoProjeto
+import NovoProjeto from '../../Bases/novoProjeto.js';
+import style from '../../Css/portifolio.module.css' // Importa a função ou componente do NovoProjeto
 
 const verificarImagem = (url) => {
     return new Promise((resolve) => {
@@ -73,9 +74,9 @@ const Portfolio = () => {
 
     return (
         <div className={Style.perfil}>
-            <button onClick={exibirNovoProjetoPopup}>+</button>
             {/* Seção de Portfólio */}
             <div className={Style.previa}>
+            <button onClick={exibirNovoProjetoPopup} className={style.butao}>+</button>
                 {empresa.portfolio && empresa.portfolio.length > 0 ? (
                     empresa.portfolio.map((portfolio, index) => (
                         <div key={index} className={Style.portfolio}>

@@ -55,7 +55,7 @@ const InicioEmpresa = ({ empresa }) => {
     const defaultImage = "/iconzip.png"; // Imagem padrão para fallback (armazenada em `public`)
 
     // Verifica se as informações da empresa estão carregadas
-    if (!empresa || !empresa.portfolio) {
+    if (!empresa.cliente[0] || !empresa.cliente[0].portfolio) {
         return <p>Carregando informações do usuário...</p>;
     }
 

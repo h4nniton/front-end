@@ -9,6 +9,12 @@
     font-weight: 300
 }
 
+.butao{
+    border-radius: 50%;
+    background-color: #03396C;
+    color: white;
+}
+
 .previa {
     display: flex;
     flex-direction: row;
