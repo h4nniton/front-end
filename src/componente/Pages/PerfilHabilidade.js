@@ -2,63 +2,63 @@ import React, { useEffect, useState } from 'react';
 import styles from '../Css/PerfilCriacao.module.css';
 import img from '../img/Logo.png';
 import { useNavigate } from 'react-router-dom';
-import { getCategoria } from '../integração/funcao.js'; // Função para buscar categorias
+import { getHabilidades } from '../integração/funcao.js'; // Função para buscar habilidades
 
-const PerflHabilidade = () => {
+const PerfilHabilidade = () => {
     const navigate = useNavigate();
-    const [categorias, setCategorias] = useState([]); // Lista de categorias
-    const [selectedIds, setSelectedIds] = useState([]); // IDs das categorias selecionadas
+    const [habilidades, setHabilidades] = useState([]); // Lista de habilidades
+    const [selectedIds, setSelectedIds] = useState([]); // IDs das habilidades selecionadas
     const idFreelancer = 1; // Substitua pelo ID do freelancer real
 
-    // Fetch categorias ao carregar a página
+    // Fetch habilidades ao carregar a página
     useEffect(() => {
-        const fetchCategorias = async () => {
-            const data = await getCategoria();
-            setCategorias(data.categorias || []); // Garante que categorias seja um array
+        const fetchHabilidades = async () => {
+            const data = await getHabilidades();
+            setHabilidades(data.habilidades || []); // Garante que habilidades seja um array
         };
-        fetchCategorias();
+        fetchHabilidades();
     }, []);
 
-    // Gerencia a seleção de categorias
+    // Gerencia a seleção de habilidades
     const handleCardClick = (id) => {
         setSelectedIds((prev) =>
             prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
         );
     };
 
-    // Envia as categorias selecionadas para o backend
-    const sendSelectedCategorias = async () => {
+    // Envia as habilidades selecionadas para o backend
+    const sendSelectedHabilidades = async () => {
         try {
             const responses = await Promise.all(
-                selectedIds.map(async (idCategoria) => {
-                    const response = await fetch('http://localhost:8080/v1/jinni/categoria/freelancer', {
+                selectedIds.map(async (idHabilidade) => {
+                    const response = await fetch('http://localhost:8080/v1/jinni/habilidade/freelancer', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
                             id_freelancer: idFreelancer,
-                            id_categoria: idCategoria,
+                            id_habilidade: idHabilidade,
                         }),
                     });
                     return response.json();
                 })
             );
             console.log('Resposta do servidor:', responses);
-            alert('Categorias enviadas com sucesso!');
+            alert('Habilidades enviadas com sucesso!');
             navigate('/PerfilHabilidade'); // Navega para a próxima tela
         } catch (error) {
-            console.error('Erro ao enviar categorias:', error);
-            alert('Ocorreu um erro ao enviar as categorias.');
+            console.error('Erro ao enviar habilidades:', error);
+            alert('Ocorreu um erro ao enviar as habilidades.');
         }
     };
 
     // Função chamada ao clicar no botão "Continuar"
     const handleClick = () => {
         if (selectedIds.length > 0) {
-            sendSelectedCategorias();
+            sendSelectedHabilidades();
         } else {
-            alert('Por favor, selecione ao menos uma categoria!');
+            alert('Por favor, selecione ao menos uma habilidade!');
         }
     };
 
@@ -69,28 +69,28 @@ const PerflHabilidade = () => {
                 <img src={img} alt="Logo" onClick={() => navigate('/')} />
             </div>
 
-            <h1>Selecione suas categorias</h1>
-            <p className={styles.p}>Selecione as áreas das quais você trabalha</p>
+            <h1>Selecione suas habilidades</h1>
+            <p className={styles.p}>Selecione as habilidades das quais você trabalha</p>
 
-            {/* Exibição dos cards de categorias */}
-            <div id="categorias" className={styles.section}>
-                {categorias.map((categoria) => (
+            {/* Exibição dos cards de habilidades */}
+            <div id="habilidades" className={styles.section}>
+                {habilidades.map((habilidade) => (
                     <div
-                        key={categoria.id}
-                        className={`${styles.card} ${selectedIds.includes(categoria.id) ? styles.cardSelected : ''}`}
-                        onClick={() => handleCardClick(categoria.id)}
+                        key={habilidade.id}
+                        className={`${styles.card} ${selectedIds.includes(habilidade.id) ? styles.cardSelected : ''}`}
+                        onClick={() => handleCardClick(habilidade.id)}
                     >
                         <img
-                            src={categoria.icon_categoria}
-                            alt={categoria.nome_categoria}
+                            src={habilidade.icon_habilidade}
+                            alt={habilidade.nome_habilidade}
                             className={styles.img}
                         />
-                        <p>{categoria.nome_categoria}</p>
+                        <p>{habilidade.nome_habilidade}</p>
                     </div>
                 ))}
             </div>
 
-            {/* Botão para enviar categorias */}
+            {/* Botão para enviar habilidades */}
             <button className={styles.botao} onClick={handleClick}>
                 Continuar
             </button>
@@ -98,4 +98,4 @@ const PerflHabilidade = () => {
     );
 };
 
-export default PerflHabilidade;
+export default PerfilHabilidade;

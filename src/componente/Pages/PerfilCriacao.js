@@ -2,20 +2,24 @@ import React, { useState, useEffect } from 'react';
 import styles from '../Css/PerfilCriacao.module.css';
 import img from '../img/Logo.png';
 import { useNavigate } from 'react-router-dom';
-import { getCategoria } from '../integração/funcao.js'; // Função para buscar categorias
-import EventosCriarCard from '../Eventos/EventosCriarCard'; // Card para exibir categorias
 
-function PerfilCriacao() {
+const PerfilCriacao = () => {
     const navigate = useNavigate();
-    const [categorias, setCategorias] = useState([]); // Lista de categorias
+    const [categorias, setCategorias] = useState([]); // Dados de categorias do GET
     const [selectedIds, setSelectedIds] = useState([]); // IDs selecionados
-    const idFreelancer = 1; // Substitua pelo ID do freelancer real
+    const idFreelancer = 1; // ID do freelancer (ajuste conforme necessário)
 
     // Fetch categorias ao carregar a página
     useEffect(() => {
         const fetchCategorias = async () => {
-            const data = await getCategoria();
-            setCategorias(data.categorias || []); // Garante que categorias seja um array
+            try {
+                const response = await fetch('https://jinni.onrender.com/v1/jinni/clientes'); // GET categorias
+                const data = await response.json();
+                setCategorias(data.categorias || []); // Garante que categorias seja um array
+            } catch (error) {
+                console.error('Erro ao buscar categorias:', error);
+                alert('Não foi possível carregar as categorias. Tente novamente mais tarde.');
+            }
         };
         fetchCategorias();
     }, []);
@@ -63,6 +67,27 @@ function PerfilCriacao() {
         }
     };
 
+    // Componente para exibir cada card de categoria
+    const CategoriaCard = ({ categoria, isSelected, onCardClick }) => {
+        const handleClick = () => {
+            onCardClick(categoria.id); // Seleciona ou desmarca o card
+        };
+
+        return (
+            <div
+                className={`${styles.card} ${isSelected ? styles.cardSelected : ''}`}
+                onClick={handleClick}
+            >
+                <img
+                    src={categoria.icon_categoria || '/default-icon.png'} // Ícone da categoria ou ícone padrão
+                    alt={categoria.nome_categoria}
+                    className={styles.img}
+                />
+                <p>{categoria.nome_categoria}</p>
+            </div>
+        );
+    };
+
     return (
         <div>
             {/* Header com o logo */}
@@ -71,12 +96,12 @@ function PerfilCriacao() {
             </div>
 
             <h1>Selecione suas categorias</h1>
-            <p className={styles.p}>Selecione as áreas das quais você trabalha</p>
+            <p className={styles.p}>Selecione as áreas nas quais você trabalha</p>
 
             {/* Exibição dos cards de categorias */}
             <div id="categorias" className={styles.section}>
                 {categorias.map((categoria) => (
-                    <EventosCriarCard
+                    <CategoriaCard
                         key={categoria.id}
                         categoria={categoria}
                         isSelected={selectedIds.includes(categoria.id)}
@@ -91,6 +116,6 @@ function PerfilCriacao() {
             </button>
         </div>
     );
-}
+};
 
 export default PerfilCriacao;

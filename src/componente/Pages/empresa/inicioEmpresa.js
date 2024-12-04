@@ -1,11 +1,9 @@
 import img from '../../img/Logo.png';
 import Style from '../../Css/inicioFreelancer.module.css';
-import empresa from '../../img/empresa.png';
-import avaliacao from '../../img/avaliacao.png';
-import { useParams } from 'react-router-dom';
 import Comentarios from '../../Bases/Comentarios2.js';
 import { useState, useEffect } from 'react';
 
+// Verifica se uma URL é uma imagem válida
 const verificarImagem = (url) => {
     return new Promise((resolve) => {
         const img = new Image();
@@ -15,16 +13,19 @@ const verificarImagem = (url) => {
     });
 };
 
+// Componente para exibir uma imagem ou um link para download de arquivos .zip
 const ImagemPortfolio = ({ arquivo, defaultImage }) => {
     const [isValidImage, setIsValidImage] = useState(false);
     const [isZipFile, setIsZipFile] = useState(false);
 
     useEffect(() => {
         const verificar = async () => {
-            const resultadoImagem = await verificarImagem(arquivo);
-            setIsValidImage(resultadoImagem);
-
-            setIsZipFile(arquivo.endsWith(".zip"));
+            if (arquivo.endsWith(".zip")) {
+                setIsZipFile(true);
+            } else {
+                const resultadoImagem = await verificarImagem(arquivo);
+                setIsValidImage(resultadoImagem);
+            }
         };
 
         if (arquivo) {
@@ -49,11 +50,13 @@ const ImagemPortfolio = ({ arquivo, defaultImage }) => {
     );
 };
 
+// Componente principal para exibir o perfil da empresa
 const InicioEmpresa = ({ empresa }) => {
-    const defaultImage = "/src/componente/img/iconzip.png";
+    const defaultImage = "/iconzip.png"; // Imagem padrão para fallback (armazenada em `public`)
 
+    // Verifica se as informações da empresa estão carregadas
     if (!empresa || !empresa.portfolio) {
-        return <p>Carregando informações do Usuario...</p>;
+        return <p>Carregando informações do usuário...</p>;
     }
 
     return (
@@ -76,9 +79,9 @@ const InicioEmpresa = ({ empresa }) => {
 
             {/* Seção de Comentários */}
             <div className={Style.avaliacoes}>
-                <h2> Avaliações</h2>
+                <h2>Avaliações</h2>
                 <div className={Style.comentario}>
-                    <Comentarios  key={empresa.id} />
+                    <Comentarios key={empresa.id} />
                 </div>
             </div>
         </div>
