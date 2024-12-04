@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import styles from '../Css/PerfilCriacao.module.css';
 import img from '../img/Logo.png';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 
 const PerfilCriacao = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
     const [categorias, setCategorias] = useState([]); // Dados de categorias do GET
     const [selectedIds, setSelectedIds] = useState([]); // IDs selecionados
-    const idFreelancer = 1; // ID do freelancer (ajuste conforme necessário)
+    const idFreelancer = id; // ID do freelancer (ajuste conforme necessário)
 
     // Fetch categorias ao carregar a página
     useEffect(() => {
@@ -15,7 +18,7 @@ const PerfilCriacao = () => {
             try {
                 const response = await fetch('https://jinni.onrender.com/v1/jinni/clientes'); // GET categorias
                 const data = await response.json();
-                setCategorias(data.categorias || []); // Garante que categorias seja um array
+                setCategorias(data.categorias[0] || []); // Garante que categorias seja um array
             } catch (error) {
                 console.error('Erro ao buscar categorias:', error);
                 alert('Não foi possível carregar as categorias. Tente novamente mais tarde.');

@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styles from '../Css/PerfilCriacao.module.css';
 import img from '../img/Logo.png';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 
 const PerfilHabilidade = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
     const [habilidades, setHabilidades] = useState([]); // Lista de habilidades do GET
     const [selectedIds, setSelectedIds] = useState([]); // IDs das habilidades selecionadas
-    const idFreelancer = 2; // Substitua pelo ID real do freelancer
+    const idFreelancer = id; // Substitua pelo ID real do freelancer
 
     // Fetch habilidades ao carregar a página
     useEffect(() => {
@@ -15,7 +18,7 @@ const PerfilHabilidade = () => {
             try {
                 const response = await fetch('http://localhost:8080/v1/jinni/habilidades'); // GET habilidades
                 const data = await response.json();
-                setHabilidades(data.habilidades || []); // Garante que habilidades seja um array
+                setHabilidades(data.habilidades[0] || []); // Garante que habilidades seja um array
             } catch (error) {
                 console.error('Erro ao buscar habilidades:', error);
                 alert('Não foi possível carregar as habilidades. Tente novamente mais tarde.');
@@ -51,7 +54,7 @@ const PerfilHabilidade = () => {
             );
             console.log('Resposta do servidor:', responses);
             alert('Habilidades enviadas com sucesso!');
-            navigate('/proximaPagina'); // Redireciona para a próxima página
+            navigate('/FimCadastro'); // Redireciona para a próxima página
         } catch (error) {
             console.error('Erro ao enviar habilidades:', error);
             alert('Ocorreu um erro ao enviar as habilidades.');
@@ -88,7 +91,7 @@ const PerfilHabilidade = () => {
                         <img
                             src={habilidade.icon_habilidade || '/default-icon.png'} // Ícone da habilidade ou ícone padrão
                             alt={habilidade.nome_habilidade}
-                            className={styles.img}
+                            className={styles.icon}
                         />
                         <p>{habilidade.nome_habilidade}</p>
                     </div>
