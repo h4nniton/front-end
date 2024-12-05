@@ -32,7 +32,7 @@ const MilestoneSystem = () => {
   ];
 
   return (
-    <div className={styles.milestone-system}>
+    <div className={styles.milestoneSystem}>
       {/* Navegação */}
       <div className="tabs">
         <button
@@ -59,23 +59,23 @@ const MilestoneSystem = () => {
         >
           Finalizados
         </button>
-      </div>
+    </div>
 
       {/* Conteúdo */}
-      <div className={styles.milestone-container}>
-        {milestones.map((milestone) => (
-          <div key={milestone.id} className={styles.milestone-card}>
-            <div className={styles.card-header}>
+      <div className={styles.milestoneContainer}>
+            {milestones.map((milestone) => (
+          <div key={milestone.id} className={styles.milestoneCard}>
+            <div className={styles.cardHeader}>
               <h4>{milestone.title}</h4>
-              <button className={styles.view-button}>👁️</button>
+              <button className={styles.viewButton}>👁️</button>
             </div>
             <p>{milestone.description}</p>
-            <div className={styles.card-actions}>
-              <button className={styles.action-button}>💬 Chat</button>
-              <button className={styles.action-button}>🗑️ Excluir</button>
+            <div className={styles.card-Actions}>
+              <button className={styles.actionButton}>💬 Chat</button>
+              <button className={styles.actionButton}>🗑️ Excluir</button>
             </div>
           </div>
-        ))}
+            ))}
       </div>
     </div>
   );

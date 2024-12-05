@@ -1,4 +1,4 @@
-.milestone-system {
+.milestoneSystem {
     font-family: Arial, sans-serif;
     padding: 20px;
   }
@@ -18,18 +18,18 @@
     font-weight: bold;
   }
   
-  .tab.active {
+  .active {
     background-color: #007bff;
     color: white;
   }
   
-  .milestone-container {
+  .milestoneContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
   }
   
-  .milestone-card {
+  .milestoneCard {
     background-color: #002060;
     color: white;
     padding: 20px;
@@ -37,14 +37,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  .card-header {
+  .cardHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  .view-button {
+  .viewButton {
     background: none;
     border: none;
     cursor: pointer;
@@ -52,13 +52,13 @@
     font-size: 18px;
   }
   
-  .card-actions {
+  .cardActions {
     margin-top: 15px;
     display: flex;
     justify-content: space-between;
   }
   
-  .action-button {
+  .actionButton {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -68,7 +68,7 @@
     background-color: #007bff;
   }
   
-  .action-button:hover {
+  .actionButton:hover {
     background-color: #0056b3;
   }
   
