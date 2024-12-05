@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import style from "../../Css/chatTela.module.css"; // Certifique-se que o caminho do CSS está correto
-import avatarImg from "../../img/avatar.png"; // Imagem importada corretamente
+import style from "../../Css/chatTela.module.css"; // Certifique-se de que o caminho do CSS está correto
+import avatarImg from "../../img/avatar.png"; // Caminho correto para a imagem
+import Swal from "sweetalert2"; // SweetAlert2 para os alertas
 
 const backendURL = "http://localhost:3001/messages"; // Substitua pelo endpoint correto
 
-const ChatApp = () => {
+const App = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [username, setUsername] = useState("Serena Van Der Woodsen"); // Nome padrão
@@ -49,6 +50,23 @@ const ChatApp = () => {
     const interval = setInterval(fetchMessages, 2000);
     return () => clearInterval(interval);
   }, []);
+
+  // Função para exibir o SweetAlert ao fechar o negócio
+  const handleCloseDeal = () => {
+    Swal.fire({
+      title: "Negócio fechado!",
+      text: "Clique no botão abaixo para acessar o link de pagamento.",
+      icon: "success",
+      confirmButtonText: "Pagar agora",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redireciona para a página de pagamento
+        window.location.href = "https://meusite.com/pagamento"; // Substitua pelo link do pagamento real
+      }
+    });
+  };
 
   return (
     <div className={style.chatApp}>
@@ -97,7 +115,7 @@ const ChatApp = () => {
                 : style.offline
             }`}
           >
-            {selectedContact === "Serena Van Der Woodsen" ? style.Online : style.Offline}
+            {selectedContact === "Serena Van Der Woodsen" ? "Online" : "Offline"}
           </span>
         </div>
         <div className={style.chatMessages}>
@@ -116,7 +134,8 @@ const ChatApp = () => {
             ))}
         </div>
         <div className={style.chatInput}>
-        <button>fechar negocío</button>
+          {/* Botão "Fechar negócio" */}
+          <button onClick={handleCloseDeal}>Fechar negócio</button>
           <input
             type="text"
             placeholder="Digite uma mensagem..."
@@ -130,4 +149,4 @@ const ChatApp = () => {
   );
 };
 
-export default ChatApp;
+export default App; // Certifique-se de que o export é feito corretamente

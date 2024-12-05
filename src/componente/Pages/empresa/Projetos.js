@@ -6,6 +6,7 @@ import Inicio from './NegocioFechado.js';
 import Portfolio from './PagamentoRealizado.js';
 import Projetos from './ProjetosAndamento.js';
 import ProjetosFinalizados from './ProjetosFinalizados.js';
+import Milestone from '../../Bases/milestone.js'
 
 function Projetoss() {
     const [currentScreen, setCurrentScreen] = useState(1);
@@ -22,41 +23,10 @@ function Projetoss() {
     return (
         <div>
             <HeaderOficial />
-            <div>
+            <div className={style.tela}>
                 <NavBar />
-                <div className={style.detalhe}>
-                    <ul className={style.navigate}>
-                        <li
-                            onClick={(e) => changeScreen(1, e)}
-                            className={`${style.selecionado}`}
-                        >
-                            Negócio Fechado
-                        </li>
-                        <li onClick={(e) => changeScreen(2, e)}>
-                            Pagamentos
-                        </li>
-                        <li onClick={(e) => changeScreen(3, e)}>
-                            Projetos em Andamento
-                        </li>
-                        <li onClick={(e) => changeScreen(4, e)}>
-                            Projetos Finalizados
-                        </li>
-                    </ul>
-                    <div>
-                        {currentScreen === 1 && (
-                            <Inicio style={style} key="screen-1" />
-                        )}
-                        {currentScreen === 2 && (
-                            <Portfolio style={style} key="screen-2" />
-                        )}
-                        {currentScreen === 3 && (
-                            <Projetos style={style} key="screen-3" />
-                        )}
-                        {currentScreen === 4 && (
-                            <ProjetosFinalizados style={style} key="screen-4" />
-                        )}
-                    </div>
-                </div>
+                <Milestone/>
+                
             </div>
         </div>
     );
