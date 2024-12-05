@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./MilestoneSystem.css"; // Certifique-se de criar o arquivo CSS correspondente
+import styles from "../Css/milestone.module.css"; // Certifique-se de criar o arquivo CSS correspondente
 
 const MilestoneSystem = () => {
   const [activeTab, setActiveTab] = useState("negociacao"); // Controle do tab ativo
@@ -32,29 +32,29 @@ const MilestoneSystem = () => {
   ];
 
   return (
-    <div className="milestone-system">
+    <div className={styles.milestone-system}>
       {/* Navegação */}
       <div className="tabs">
         <button
-          className={`tab ${activeTab === "negociacao" ? "active" : ""}`}
-          onClick={() => setActiveTab("negociacao")}
+            className={`${styles.tab} ${activeTab === "negociacao" ? "active" : ""}`}
+            onClick={() => setActiveTab("negociacao")}
         >
           Em negociação
         </button>
         <button
-          className={`tab ${activeTab === "pagamento" ? "active" : ""}`}
+          className={`${styles.tab} ${activeTab === "pagamento" ? "active" : ""}`}
           onClick={() => setActiveTab("pagamento")}
         >
           Pagamento
         </button>
         <button
-          className={`tab ${activeTab === "iniciados" ? "active" : ""}`}
+          className={`${styles.tab} ${activeTab === "iniciados" ? "active" : ""}`}
           onClick={() => setActiveTab("iniciados")}
         >
           Iniciados
         </button>
         <button
-          className={`tab ${activeTab === "finalizados" ? "active" : ""}`}
+          className={`${styles.tab} ${activeTab === "finalizados" ? "active" : ""}`}
           onClick={() => setActiveTab("finalizados")}
         >
           Finalizados
@@ -62,17 +62,17 @@ const MilestoneSystem = () => {
       </div>
 
       {/* Conteúdo */}
-      <div className="milestone-container">
+      <div className={styles.milestone-container}>
         {milestones.map((milestone) => (
-          <div key={milestone.id} className="milestone-card">
-            <div className="card-header">
+          <div key={milestone.id} className={styles.milestone-card}>
+            <div className={styles.card-header}>
               <h4>{milestone.title}</h4>
-              <button className="view-button">👁️</button>
+              <button className={styles.view-button}>👁️</button>
             </div>
             <p>{milestone.description}</p>
-            <div className="card-actions">
-              <button className="action-button">💬 Chat</button>
-              <button className="action-button">🗑️ Excluir</button>
+            <div className={styles.card-actions}>
+              <button className={styles.action-button}>💬 Chat</button>
+              <button className={styles.action-button}>🗑️ Excluir</button>
             </div>
           </div>
         ))}
