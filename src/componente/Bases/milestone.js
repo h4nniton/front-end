@@ -70,7 +70,7 @@ const MilestoneSystem = () => {
               <button className={styles.viewButton}>👁️</button>
             </div>
             <p>{milestone.description}</p>
-            <div className={styles.card-Actions}>
+            <div className={styles.cardActions}>
               <button className={styles.actionButton}>💬 Chat</button>
               <button className={styles.actionButton}>🗑️ Excluir</button>
             </div>
